@@ -69,6 +69,7 @@
 		C63D7D6D214B4DC400713BDC /* MY_Demo */ = {
 			isa = PBXGroup;
 			children = (
+				C63D7D80214BC01500713BDC /* Utils */,
 				C63D7D6E214B4DC400713BDC /* AppDelegate.swift */,
 				C63D7D70214B4DC400713BDC /* ViewController.swift */,
 				C63D7D72214B4DC400713BDC /* Main.storyboard */,
@@ -77,6 +78,21 @@
 				C63D7D7A214B4DC500713BDC /* Info.plist */,
 			);
 			path = MY_Demo;
+			sourceTree = "<group>";
+		};
+		C63D7D80214BC01500713BDC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C63D7D81214BC03500713BDC /* AlamofireRequest */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C63D7D81214BC03500713BDC /* AlamofireRequest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlamofireRequest;
 			sourceTree = "<group>";
 		};
 		DB64E79ABA7B0C7B15DB43E4 /* Pods */ = {
