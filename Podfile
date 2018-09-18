@@ -8,6 +8,9 @@ target 'MY_Demo' do
 pod 'Alamofire'
 pod 'Kingfisher'
 pod 'SnapKit'
-
-
+pod 'ObjectMapper' 
+#pod 'AlamofireObjectMapper'
+pod 'RxSwift'
+pod 'Moya'
+pod 'Moya/RxSwift'
 end
