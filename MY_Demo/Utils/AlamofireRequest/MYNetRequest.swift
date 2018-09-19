@@ -11,14 +11,22 @@ import RxSwift
 import Moya
 import Alamofire
 
-let dispose = DisposeBag()
+struct MYCustomRequest {
+    var isSave : Bool = false
+    var cacheTime : NSInteger = 5
+    var isActivityIndicator : Bool = false
+    var parameter : [String:Any]? = nil
+    
+}
+ 
 
 public final class MYNetRequest: NSObject {
 
     var provider : MoyaProvider<ApiManager>
-    
+    var customRequest : MYCustomRequest
 
-    override init() {
+    init(_ custom : MYCustomRequest? = MYCustomRequest()) {
+        self.customRequest = custom!
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         let policies: [String: ServerTrustPolicy] = [
@@ -28,22 +36,23 @@ public final class MYNetRequest: NSObject {
         let manager = Alamofire.SessionManager(configuration: configuration,serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies))
         
         manager.startRequestsImmediately = false
-        
-        self.provider = MoyaProvider<ApiManager>(plugins: [networkActivityPlugin,MYRequestLoadingPlugin()])
+        /// 设置请求头,超时时间等
+        if (custom?.isActivityIndicator)! {
+           self.provider = MoyaProvider<ApiManager>(manager: manager,plugins: [networkActivityPlugin,MYRequestLoadingPlugin(self.customRequest)])
+        }else{
+            self.provider = MoyaProvider<ApiManager>(manager: manager,plugins: [MYRequestLoadingPlugin(self.customRequest)])
+        }
         
     }
     
-    public func request(_ token : Moya.TargetType, callbackQueue: DispatchQueue? = nil)  {
-        
-        
-        self.provider.rx.request(token as! ApiManager, callbackQueue: callbackQueue).asObservable()
-            .mapString().subscribe(onNext: { (s) in
-                print(s)
-            }, onError: { (e) in
-                print(e)
-            }).disposed(by: dispose)
-        
-        
+    @discardableResult
+    public func request(_ token : Moya.TargetType, callbackQueue: DispatchQueue? = nil) -> Observable<Any> {
+        return self.provider.rx.request(token as! ApiManager, callbackQueue: callbackQueue).asObservable()
+            .mapJSON()
+    }
+    
+    deinit {
+        print("网络请求对象销毁!!!")
     }
     
 }

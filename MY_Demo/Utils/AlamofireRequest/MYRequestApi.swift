@@ -13,13 +13,15 @@
 import Foundation
 import Moya
 
+let cachePath = NSHomeDirectory() + "/Library/Caches" + "/MYLazyRequestCache"
+
 
 enum ApiManager {
     case testHome
-    case testUser
+    case testUser([String:Any])
 }
 
-
+///执行代理
 extension ApiManager : Moya.TargetType {
     
     
@@ -37,9 +39,9 @@ extension ApiManager : Moya.TargetType {
     var path: String {
         switch self {
         case .testHome:
-            return "index/banner"
+            return "course/info"
         default:
-            return "index/banner"
+            return "course/info"
             
         }
     }
@@ -50,57 +52,29 @@ extension ApiManager : Moya.TargetType {
             return .post
             
         default:
-            return .get
-        }
-    }
-    
-    var sampleData: Data {
-        switch self {
-            
-        default:
-            return "".data(using: String.Encoding.utf8)!
+            return .post
         }
     }
     
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .testHome:
+            return .requestParameters(parameters: ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"], encoding: URLEncoding.default)
+        case .testUser(let paramete):
+            return .requestParameters(parameters: paramete, encoding: URLEncoding.default)
+            
+        default:
+            return .requestPlain
+        }
     }
     
     var headers: [String : String]? {
-        switch self {
-         
-        default:
-            return nil
-        }
+        return nil
     }
-    
-    var isShowNavigationHUD : Bool {
-        switch self {
-        
-        default:
-            return false
-        }
-    }
-    
-    var isSave: Bool {
-        return false
-    }
-    
-    var cashTime: NSInteger {
-        return 0
+  
+    var sampleData: Data {
+        return "".data(using: String.Encoding.utf8)!
     }
  
 }
-
-public extension TargetType {
-    var isSave : Bool {
-        return false
-    }
-    
-    var cashTime: NSInteger {
-        return 0
-    }
-    var isShowNavigationHUD : Bool {
-        return false
-    }
-}
+ 
