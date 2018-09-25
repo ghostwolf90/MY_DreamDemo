@@ -19,6 +19,7 @@ let cachePath = NSHomeDirectory() + "/Library/Caches" + "/MYLazyRequestCache"
 enum ApiManager {
     case testHome
     case testUser([String:Any])
+    case testUserapi([String:Any])
 }
 
 ///执行代理
@@ -39,7 +40,7 @@ extension ApiManager : Moya.TargetType {
     var path: String {
         switch self {
         case .testHome:
-            return "course/info"
+            return "index/banner"
         default:
             return "course/info"
             
@@ -58,8 +59,7 @@ extension ApiManager : Moya.TargetType {
     
     var task: Task {
         switch self {
-        case .testHome:
-            return .requestParameters(parameters: ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"], encoding: URLEncoding.default)
+         
         case .testUser(let paramete):
             return .requestParameters(parameters: paramete, encoding: URLEncoding.default)
             

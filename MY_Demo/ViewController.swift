@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import Moya
-import RxSwift
+ 
 
-let dispose = DisposeBag()
+
 
 class ViewController: UIViewController {
 
@@ -18,19 +17,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
      
-        let parm = ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"]
+//        let parm = ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"]
         var custom = MYCustomRequest()
         custom.isSave = true
-        custom.parameter = parm
+//        custom.parameter = parm
         let provider = MYNetRequest(custom)
         
         provider.request(ApiManager.testHome).subscribe(onNext: { (result) in
-//            print(result)
+            print(result)
         }, onError: { (error) in
-//            print(error)
+            print(error)
         }, onCompleted: {
             print("完成!!")
         }).disposed(by: dispose)
+        
+        
         
         
         

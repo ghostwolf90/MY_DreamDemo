@@ -11,6 +11,8 @@ PODS:
     - RxSwift (~> 4.0)
   - ObjectMapper (3.3.0)
   - Result (3.2.4)
+  - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
 
@@ -20,6 +22,7 @@ DEPENDENCIES:
   - Moya
   - Moya/RxSwift
   - ObjectMapper
+  - RxCocoa
   - RxSwift
   - SnapKit
 
@@ -30,6 +33,7 @@ SPEC REPOS:
     - Moya
     - ObjectMapper
     - Result
+    - RxCocoa
     - RxSwift
     - SnapKit
 
@@ -39,9 +43,10 @@ SPEC CHECKSUMS:
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 8332b41dd737c737c5efc63525a488e2691cf6fd
+PODFILE CHECKSUM: d94810ce2ca201e88816ef3d2649749c45c49d80
 
 COCOAPODS: 1.5.3

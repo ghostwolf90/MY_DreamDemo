@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */; };
+		C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */; };
+		C625E9972153818A0098C422 /* MYResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E9962153818A0098C422 /* MYResultModel.swift */; };
 		C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D6E214B4DC400713BDC /* AppDelegate.swift */; };
 		C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D70214B4DC400713BDC /* ViewController.swift */; };
 		C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63D7D72214B4DC400713BDC /* Main.storyboard */; };
@@ -17,6 +19,11 @@
 		C63F0E342150E62D00BC8B0E /* MYRequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F0E332150E62D00BC8B0E /* MYRequestApi.swift */; };
 		C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F0E352150EE5C00BC8B0E /* MYRequestPlugin.swift */; };
 		C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F0E392151040400BC8B0E /* MYNetRequest.swift */; };
+		C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE12159C7C100B079E5 /* MYTextView.swift */; };
+		C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */; };
+		C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */; };
+		C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */; };
+		C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +31,8 @@
 		59ABE1D9540DA64FBADDE1E2 /* Pods-MY_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B386F20748E62FB0141D9B3 /* Pods-MY_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.release.xcconfig"; sourceTree = "<group>"; };
 		C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMapperCommonFunc.swift; sourceTree = "<group>"; };
+		C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MYObservable+ObjectMapper.swift"; sourceTree = "<group>"; };
+		C625E9962153818A0098C422 /* MYResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYResultModel.swift; sourceTree = "<group>"; };
 		C63D7D6B214B4DC400713BDC /* MY_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MY_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63D7D6E214B4DC400713BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C63D7D70214B4DC400713BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +44,11 @@
 		C63F0E332150E62D00BC8B0E /* MYRequestApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYRequestApi.swift; sourceTree = "<group>"; };
 		C63F0E352150EE5C00BC8B0E /* MYRequestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYRequestPlugin.swift; sourceTree = "<group>"; };
 		C63F0E392151040400BC8B0E /* MYNetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYNetRequest.swift; sourceTree = "<group>"; };
+		C6515CE12159C7C100B079E5 /* MYTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYTextView.swift; sourceTree = "<group>"; };
+		C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardDefine.swift; sourceTree = "<group>"; };
+		C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardInputView.swift; sourceTree = "<group>"; };
+		C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardImageExtension.swift; sourceTree = "<group>"; };
+		C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardViewExtension.swift; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +125,7 @@
 		C63D7D80214BC01500713BDC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C6515CE02159C72F00B079E5 /* Keyboard */,
 				C63D7D81214BC03500713BDC /* AlamofireRequest */,
 			);
 			path = Utils;
@@ -119,11 +134,25 @@
 		C63D7D81214BC03500713BDC /* AlamofireRequest */ = {
 			isa = PBXGroup;
 			children = (
+				C63F0E392151040400BC8B0E /* MYNetRequest.swift */,
 				C63F0E332150E62D00BC8B0E /* MYRequestApi.swift */,
 				C63F0E352150EE5C00BC8B0E /* MYRequestPlugin.swift */,
-				C63F0E392151040400BC8B0E /* MYNetRequest.swift */,
+				C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */,
+				C625E9962153818A0098C422 /* MYResultModel.swift */,
 			);
 			path = AlamofireRequest;
+			sourceTree = "<group>";
+		};
+		C6515CE02159C72F00B079E5 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */,
+				C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */,
+				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
+				C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */,
+				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 		DB64E79ABA7B0C7B15DB43E4 /* Pods */ = {
@@ -169,6 +198,7 @@
 				TargetAttributes = {
 					C63D7D6A214B4DC300713BDC = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -234,6 +264,7 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -244,6 +275,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -259,11 +291,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C625E9972153818A0098C422 /* MYResultModel.swift in Sources */,
 				C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */,
+				C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */,
+				C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */,
 				C63F0E342150E62D00BC8B0E /* MYRequestApi.swift in Sources */,
 				C63D7D87215091D100713BDC /* TestModel.swift in Sources */,
 				C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */,
+				C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */,
 				C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */,
+				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
+				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
+				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,
 				C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
 			);
@@ -413,6 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = MY_Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,7 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magic.MY-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -432,6 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = MY_Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,7 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magic.MY-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -11,6 +11,8 @@ import RxSwift
 import Moya
 import Alamofire
 
+let dispose = DisposeBag()
+
 struct MYCustomRequest {
     var isSave : Bool = false
     var cacheTime : NSInteger = 5
@@ -25,34 +27,60 @@ public final class MYNetRequest: NSObject {
     var provider : MoyaProvider<ApiManager>
     var customRequest : MYCustomRequest
 
-    init(_ custom : MYCustomRequest? = MYCustomRequest()) {
-        self.customRequest = custom!
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-        let policies: [String: ServerTrustPolicy] = [
-            
-            "ap.grtstar.cn": .disableEvaluation
-        ]
-        let manager = Alamofire.SessionManager(configuration: configuration,serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies))
-        
-        manager.startRequestsImmediately = false
+    init(_ custom : MYCustomRequest = MYCustomRequest()) {
+        self.customRequest = custom
+
         /// 设置请求头,超时时间等
-        if (custom?.isActivityIndicator)! {
-           self.provider = MoyaProvider<ApiManager>(manager: manager,plugins: [networkActivityPlugin,MYRequestLoadingPlugin(self.customRequest)])
+        if custom.isActivityIndicator {
+           self.provider = MoyaProvider<ApiManager>(manager: Manager.default,plugins: [networkActivityPlugin,MYRequestLoadingPlugin(self.customRequest)])
         }else{
-            self.provider = MoyaProvider<ApiManager>(manager: manager,plugins: [MYRequestLoadingPlugin(self.customRequest)])
+            self.provider = MoyaProvider<ApiManager>(manager: Manager.default,plugins: [MYRequestLoadingPlugin(self.customRequest)])
         }
         
     }
     
     @discardableResult
-    public func request(_ token : Moya.TargetType, callbackQueue: DispatchQueue? = nil) -> Observable<Any> {
-        return self.provider.rx.request(token as! ApiManager, callbackQueue: callbackQueue).asObservable()
-            .mapJSON()
+    func request(_ token : Moya.TargetType, callbackQueue: DispatchQueue? = .global()) -> Observable<MYResultModel> {
+        
+        return Observable<MYResultModel>.create({ (observer) -> Disposable in
+            return self.provider.rx.request(token as! ApiManager, callbackQueue: callbackQueue)
+                .asObservable()
+                .mapJSON()
+                .mapObject(type: MYResultModel.self).subscribe(onNext: { (result) in
+                    DispatchQueue.global().async {
+                        observer.onNext(result)
+                        DispatchQueue.main.async {
+                            observer.onCompleted()
+                        }
+                    }
+                }, onError: { (error) in
+                    DispatchQueue.main.async {
+                        observer.onError(error)
+                    }
+                })
+        })
+        
+        
     }
+    
+    
     
     deinit {
         print("网络请求对象销毁!!!")
     }
     
 }
+
+//        return Observable<Any>.create({ (observer) -> Disposable in
+//            self.provider.rx.request(token as! ApiManager, callbackQueue: callbackQueue)
+//                .asObservable()
+//                .mapJSON()
+//                .subscribe(onNext: { (result) in
+//                    observer.onNext(result)
+//                }, onError: { (error) in
+//                    observer.onError(error)
+//                }, onCompleted: {
+//                    observer.onCompleted()
+//                })
+//
+//        })

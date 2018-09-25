@@ -13,4 +13,5 @@ pod 'ObjectMapper'
 pod 'RxSwift'
 pod 'Moya'
 pod 'Moya/RxSwift'
+pod 'RxCocoa'
 end
