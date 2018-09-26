@@ -14,6 +14,8 @@ enum MYKeyboardInputViewEnum {
         case None
         case System
         case Emoji
+        case Record
+        case Funcs
     }
     enum EmojiIndicatorType {
         case None
@@ -36,8 +38,8 @@ let MYSafeAreaHeight : CGFloat = Int(MYStatusHeight) > 20 ? 34 : 0// iphone X �
 let MYTextViewTextFont : CGFloat = 16.0 //字号大小
 let MYTextViewTextDefineHeight :CGFloat = 14.0//textView文字16号字,默认间距
 let MYTextViewTopBottomSpace : CGFloat  = 7.0 //textview 上下间距
-let MYInputViewWidgetSpace : CGFloat = 10.0 //控件内间距
-let MYEmojiBtnWH : CGFloat = 35.0;//emoji按钮宽高
+let MYInputViewWidgetSpace : CGFloat = 7.0 //控件内间距
+let MYEmojiBtnWH : CGFloat = 30.0;//emoji按钮宽高
 let MYEmojiBtnSpace : CGFloat = 5.0;//emoji按钮间距
 let MYEmojiTextMaxLine : Int = 3;
 let MYEmojiTextMinLine : Int = 1;//最大与最小行计算

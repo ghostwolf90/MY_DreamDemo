@@ -18,16 +18,17 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     var defineHeight : CGFloat {
         return heightWithFit()
     }
-    private var keyboardType = MYKeyboardInputViewEnum.KeyboardType.System
     
     init() {
+        self.keyboardType = .None
         super.init(frame: .zero)
-        
         addInit()
     }
     override init(frame: CGRect) {
+        self.keyboardType = .None
         super.init(frame: frame)
         self.initFrame = frame
+        self.keyboardType = .None
         addInit()
     }
     
@@ -42,6 +43,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         height = heightWithFit()
         addSubview(textView)
         addSubview(emojiButton)
+        addSubview(voiceButton)
+        addSubview(funcButton)
         //增加监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -93,27 +96,54 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     private func calculateWidgetFrame(){
         let left = MYEmojiBtnWH + MYInputViewWidgetSpace * 2.0
         let top = MYTextViewTopBottomSpace
-        let width = self.width - left - MYInputViewWidgetSpace
-        let height = heightWithFit() - MYTextViewTopBottomSpace * 2.0
+        let totleHeight = heightWithFit()
+        
+        let widgetY = totleHeight - MYEmojiBtnWH - MYInputViewWidgetSpace
+        
+        voiceButton.frame = CGRect.init(x: MYInputViewWidgetSpace, y:  widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
+        funcButton.frame = CGRect.init(x: self.width - MYInputViewWidgetSpace - MYEmojiBtnWH, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
+        emojiButton.frame = CGRect.init(x: funcButton.left - MYEmojiBtnWH - MYInputViewWidgetSpace, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
+        let width = emojiButton.left - left - MYInputViewWidgetSpace
+        let height = totleHeight - MYTextViewTopBottomSpace * 2.0
         textView.frame = CGRect.init(x: left, y: top, width: width, height: height)
-        emojiButton.frame = CGRect.init(x: MYInputViewWidgetSpace, y: textView.bottom - MYEmojiBtnWH , width: MYEmojiBtnWH, height: MYEmojiBtnWH)
         
     }
     
     // MARK: - 方法响应
-    @objc func changeTheInputSource(_ sender: UIButton){
-        if isShowKeyboard {
-            /// 键盘已经弹出,要切换
-            showKeyboardFromType(self.keyboardType == .System ? .Emoji : .System)
-        }else {
-            showKeyboardFromType(.Emoji)
-            textView.becomeFirstResponder()
+    @objc func voiceButtonDown(_ sender: UIButton){
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            self.keyboardType = .Record
+        }else{
+            self.keyboardType = .System
+        }
+        
+    }
+    @objc func emojiButtonDown(_ sender: UIButton){
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            self.keyboardType = .Emoji
+        }else{
+            self.keyboardType = .System
+        }
+        
+    }
+    @objc func moreFuncButtonDown(_ sender: UIButton){
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            self.keyboardType = .Funcs
+        }else{
+            self.keyboardType = .System
         }
     }
     
     @objc func keyboardWillShow(_ notification: Notification){
         if self.superview == nil {
             return
+        }
+        if self.keyboardType == .Emoji || self.keyboardType == .Funcs {
+            self.emojiButton.isSelected = false
+            self.funcButton.isSelected = false
         }
         isShowKeyboard = true
         let userInfo = notification.userInfo!
@@ -222,30 +252,28 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
     // MARK: - 私有方法
     
-    private func showKeyboardFromType(_ type: MYKeyboardInputViewEnum.KeyboardType){
-        if self.keyboardType == type {
-            return
-        }
-        var name = "toggle_emoji"
-        switch type {
-        case .None:
-            textView.inputView = nil
-            break
-        case .System:
-            textView.inputView = nil
+    private var keyboardType : MYKeyboardInputViewEnum.KeyboardType {
+        willSet{
+            if keyboardType == newValue {
+                return
+            }
+            switch newValue {
             
-            break
-        case .Emoji:
-//            textView.inputView = self.emojiKeyboardView
-            name = "toggle_keyboard"
+            case .Emoji:
+                break
+            case .System:
+                break
+            case .Funcs:
+                break
+            case .Record:
+                break
+            default:
+                break
+            }
             
-            break
         }
-        textView.reloadInputViews()
-        emojiButton.setImage(UIImage.image(name: name, path: "keyboard"), for: .normal)
-        self.keyboardType = type
-        
     }
+    
     
     // MARK: - 懒加载
 
@@ -265,10 +293,27 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         return view
     }()
     
+    private lazy var voiceButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage(named: "toggle_record"), for: .normal)
+        button.setImage(UIImage(named:"toggle_keyboard"), for: .selected)
+        button.addTarget(self, action: #selector(voiceButtonDown(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var funcButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage(named: "toggle_func"), for: .normal)
+        button.setImage(UIImage(named: "toggle_func"), for: .selected)
+        button.addTarget(self, action: #selector(moreFuncButtonDown(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var emojiButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.image(name: "toggle_emoji", path: "keyboard"), for: .normal)
-        button.addTarget(self, action: #selector(changeTheInputSource(_:)), for: .touchUpInside)
+        button.setImage(UIImage(named: "toggle_emoji"), for: .normal)
+        button.setImage(UIImage(named: "toggle_keyboard"), for: .selected)
+        button.addTarget(self, action: #selector(emojiButtonDown(_:)), for: .touchUpInside)
         return button
     }()
     

@@ -24,6 +24,7 @@
 		C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */; };
 		C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */; };
 		C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */; };
+		C6515CF22159D36B00B079E5 /* MYKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardInputView.swift; sourceTree = "<group>"; };
 		C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardImageExtension.swift; sourceTree = "<group>"; };
 		C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardViewExtension.swift; sourceTree = "<group>"; };
+		C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MYKeyboard.bundle; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,13 +148,30 @@
 		C6515CE02159C72F00B079E5 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */,
-				C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */,
+				C6515CEE2159D20600B079E5 /* Resources */,
+				C6515CED2159CEDF00B079E5 /* Category */,
 				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
 				C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */,
 				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		C6515CED2159CEDF00B079E5 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */,
+				C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		C6515CEE2159D20600B079E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DB64E79ABA7B0C7B15DB43E4 /* Pods */ = {
@@ -225,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6515CF22159D36B00B079E5 /* MYKeyboard.bundle in Resources */,
 				C63D7D79214B4DC500713BDC /* LaunchScreen.storyboard in Resources */,
 				C63D7D76214B4DC500713BDC /* Assets.xcassets in Resources */,
 				C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */,
