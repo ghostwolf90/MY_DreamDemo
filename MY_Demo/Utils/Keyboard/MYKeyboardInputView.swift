@@ -46,8 +46,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         addSubview(voiceButton)
         addSubview(funcButton)
         //增加监听
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func layoutSubviews() {
@@ -147,8 +147,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         }
         isShowKeyboard = true
         let userInfo = notification.userInfo!
-        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-        let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         var inputViewFrame = self.frame
         let textViewHeight = heightWithFit()
         inputViewFrame.origin.y = (self.superview?.bounds.height)! - keyboardFrame.height - textViewHeight
@@ -165,7 +165,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         }
         isShowKeyboard = false
         let userInfo = notification.userInfo!
-        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
         var inputViewFrame = self.frame
         let textViewHeight = heightWithFit()
         inputViewFrame.origin.x = initFrame.minX

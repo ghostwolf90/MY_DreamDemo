@@ -34,7 +34,7 @@ class MYTextView: UITextView {
             frame.size.height = 34.0
         }
         super.init(frame: frame, textContainer: textContainer)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: .UITextViewTextDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextView.textDidChangeNotification, object: nil)
     }
     
     override func layoutSubviews() {
@@ -77,7 +77,7 @@ class MYTextView: UITextView {
     // MARK: - 计算 placeholder frame
     
     private func calcuatePlaceholderFrame() -> CGRect {
-        let insets = UIEdgeInsetsMake(7.0, 4.0, 7.0, 4.0)
+        let insets = UIEdgeInsets.init(top: 7.0, left: 4.0, bottom: 7.0, right: 4.0)
         let maxWidth = self.bounds.size.width - insets.right - insets.left
         let placeSize = calculatePlaceholderSize(maxWidth)
         let caretRect = self.caretRect(for: self.beginningOfDocument)
@@ -92,7 +92,7 @@ class MYTextView: UITextView {
     
     private func calculatePlaceholderSize(_ maxWidth: CGFloat) ->CGSize {
         let string = self.placeholder! as NSString
-        var attribute = [NSAttributedStringKey : Any]()
+        var attribute = [NSAttributedString.Key : Any]()
         attribute[.font] = self.placeholderLabel.font
         
         let paragraphStyle = NSMutableParagraphStyle()
