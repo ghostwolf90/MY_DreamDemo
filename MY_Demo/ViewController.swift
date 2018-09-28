@@ -34,19 +34,15 @@ class ViewController: UIViewController {
         let inputView = MYKeyboardInputView()
         let height = inputView.heightWithFit()
         //        inputView.frame = CGRect.init(x: 0, y: MYSCREEN_HEIGHT - MYTopHeight - MYSafeAreaHeight - height, width: MYSCREEN_WIDTH, height: height)
-        var bottom : CGFloat = 0.0
-        if #available(iOS 11.0, *) {
-            bottom =  (UIApplication.shared.delegate?.window??.safeAreaInsets.bottom)!
-        }
-        let top = UIApplication.shared.statusBarFrame.height
-        inputView.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
+        
+ 
+        inputView.frame = CGRect.init(x: 0, y: MYSCREEN_HEIGHT  - MYSafeAreaHeight - height, width: UIScreen.main.bounds.width, height: height)
         inputView.initFrame = inputView.frame
         
         
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 100, width: UIScreen.main.bounds.width, height: height))
-        self.view.addSubview(view)
         
-        view.addSubview(inputView)
+        self.view.addSubview(inputView)
+        
         
     }
     

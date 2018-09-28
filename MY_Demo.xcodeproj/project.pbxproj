@@ -10,6 +10,8 @@
 		C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */; };
 		C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */; };
 		C625E9972153818A0098C422 /* MYResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E9962153818A0098C422 /* MYResultModel.swift */; };
+		C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */; };
+		C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */; };
 		C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D6E214B4DC400713BDC /* AppDelegate.swift */; };
 		C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D70214B4DC400713BDC /* ViewController.swift */; };
 		C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63D7D72214B4DC400713BDC /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 		C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMapperCommonFunc.swift; sourceTree = "<group>"; };
 		C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MYObservable+ObjectMapper.swift"; sourceTree = "<group>"; };
 		C625E9962153818A0098C422 /* MYResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYResultModel.swift; sourceTree = "<group>"; };
+		C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiKeyboardView.swift; sourceTree = "<group>"; };
+		C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardButtonExtension.swift; sourceTree = "<group>"; };
 		C63D7D6B214B4DC400713BDC /* MY_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MY_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63D7D6E214B4DC400713BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C63D7D70214B4DC400713BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
 				C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */,
 				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
+				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 		C6515CED2159CEDF00B079E5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */,
 				C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */,
 				C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */,
 			);
@@ -321,7 +327,9 @@
 				C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */,
 				C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */,
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
+				C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */,
 				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
+				C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */,
 				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,
 				C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
