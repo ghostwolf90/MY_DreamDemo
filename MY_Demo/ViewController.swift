@@ -7,8 +7,8 @@
 //
 
 import UIKit
- 
-
+import Kingfisher
+import MYEasyHUDSDK
 
 
 class ViewController: UIViewController {
@@ -42,6 +42,18 @@ class ViewController: UIViewController {
         
         
         self.view.addSubview(inputView)
+        
+        
+        let imageView = UIImageView(frame: .init(x: 50, y: 50, width: 100, height: 100));
+        imageView.backgroundColor = .red
+        self.view.addSubview(imageView)
+        let path = Bundle.main.path(forResource: "loading", ofType: "gif")
+        let imageResource = ImageResource.init(downloadURL: URL.init(fileURLWithPath: path!))
+        imageView.kf.setImage(with: imageResource)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(0.5))) {
+            MLoadingViewHUD.showText(text: "cesjo ad")
+        }
         
         
     }

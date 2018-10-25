@@ -1,0 +1,11 @@
+framework module MYEasyHUDSDK {
+  umbrella header "MYEasyHUDSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module MYEasyHUDSDK.Swift {
+    header "MYEasyHUDSDK-Swift.h"
+    requires objc
+}
