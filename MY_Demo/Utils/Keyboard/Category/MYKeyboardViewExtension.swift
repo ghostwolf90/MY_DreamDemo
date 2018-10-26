@@ -188,4 +188,23 @@ public extension UIView {
     public func defaultRoundCourners(_ radius: CGFloat) {
         self.roundCorners(.allCorners, radius: radius)
     }
+    
+    /// 获取当前栈顶的控制器
+    ///
+    /// - Parameter rootViewController: UIApplication.shared.delegate?.window.rootControl
+    /// - Returns: 最顶层控制器
+    public func topViewControlWithRootViewControler(_ rootViewController : UIViewController?) -> UIViewController {
+        if rootViewController!.isKind(of: UITabBarController.self) {
+            let tabBarControl = rootViewController as! UITabBarController
+            return topViewControlWithRootViewControler(tabBarControl.selectedViewController)
+        }else if rootViewController!.isKind(of: UINavigationController.self) {
+            let navigationControl = rootViewController as! UINavigationController
+            return topViewControlWithRootViewControler( navigationControl.visibleViewController)
+        }else if (rootViewController!.presentedViewController != nil) {
+            let presentedViewController = rootViewController?.presentedViewController
+            return topViewControlWithRootViewControler(presentedViewController)
+        }else {
+            return rootViewController!
+        }
+    }
 }

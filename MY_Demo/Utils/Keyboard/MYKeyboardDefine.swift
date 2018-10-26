@@ -75,7 +75,9 @@ let MYEmojiPreviewHeight : CGFloat = 100.0//界面高度
 let MYEmojiPreviewWidth : CGFloat = 68.0//界面宽度
 let MYDuration : TimeInterval = 0.25//动画执行时间
 
+let MYKeyboardSpace5 : CGFloat = 5.0
 
+let MYKeyboardSpace20 : CGFloat = 20
 
 func MYColorForRGB(_ r:Int,_ g: Int,_ b:Int) ->  UIColor{
     return UIColor.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1.0)

@@ -59,27 +59,27 @@ public final class MYRequestLoadingPlugin: PluginType {
         print("结束请求")
         DispatchQueue.global().async { [weak self] in
             
-            if (self?.custom.isSave)! {
-                switch result {
-                case let .success(response):
-                    var hostUrl = target.baseURL.absoluteString + target.path
-                    if self?.custom.parameter != nil {
-                        self?.custom.parameter?.forEach({ (arg) in
-                            let (key, value) = arg
-                            hostUrl = hostUrl.appendingFormat("&%@=%@", key,value as! CVarArg)
-                        })
-                    }
-                    let base64 = MYbase64(hostUrl)
-                    if FileManager.default.fileExists(atPath: cachePath) {
-                        let filePath = cachePath + "/\(base64)"
-                        print(filePath)
-                        NSKeyedArchiver.archiveRootObject(response.data, toFile: filePath)
-                    }
-                   
-                default:
-                    break
-                }
-            }
+//            if (self?.custom.isSave)! {
+//                switch result {
+//                case let .success(response):
+//                    var hostUrl = target.baseURL.absoluteString + target.path
+//                    if self?.custom.parameter != nil {
+//                        self?.custom.parameter?.forEach({ (arg) in
+//                            let (key, value) = arg
+//                            hostUrl = hostUrl.appendingFormat("&%@=%@", key,value as! CVarArg)
+//                        })
+//                    }
+//                    let base64 = MYbase64(hostUrl)
+//                    if FileManager.default.fileExists(atPath: cachePath) {
+//                        let filePath = cachePath + "/\(base64)"
+//                        print(filePath)
+//                        NSKeyedArchiver.archiveRootObject(response.data, toFile: filePath)
+//                    }
+//                   
+//                default:
+//                    break
+//                }
+//            }
         }
         
     }

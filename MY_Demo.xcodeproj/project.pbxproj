@@ -29,6 +29,7 @@
 		C6515CF22159D36B00B079E5 /* MYKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */; };
 		C663160A218174CF001D98F5 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6631609218174CF001D98F5 /* loading.gif */; };
 		C66316552181CF3E001D98F5 /* MYEasyHUDSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */; };
+		C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MYKeyboard.bundle; sourceTree = "<group>"; };
 		C6631609218174CF001D98F5 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MYEasyHUDSDK.framework; sourceTree = "<group>"; };
+		C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYVoiceTouchView.swift; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 				C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */,
 				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
 				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
+				C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */,
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
 				C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */,
+				C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */,
 				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
 				C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */,
 				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,

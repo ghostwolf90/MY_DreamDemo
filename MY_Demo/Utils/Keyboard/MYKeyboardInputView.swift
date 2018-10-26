@@ -47,7 +47,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         addSubview(emojiButton)
         addSubview(voiceButton)
         addSubview(funcButton)
-        
+        addSubview(voiceView)
         //增加监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -109,16 +109,16 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let width = emojiButton.left - left - MYInputViewWidgetSpace
         let height = totleHeight - MYTextViewTopBottomSpace * 2.0
         textView.frame = CGRect.init(x: left, y: top, width: width, height: height)
-        
+        voiceView.frame = textView.frame
     }
     
     // MARK: - 方法响应
     @objc func voiceButtonDown(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
-            self.keyboardType = .Record
-        }else{
             self.keyboardType = .System
+        }else{
+            self.keyboardType = .Record
         }
         
     }
@@ -144,10 +144,11 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         if self.superview == nil {
             return
         }
-        if self.keyboardType == .Emoji || self.keyboardType == .Funcs {
-            self.emojiButton.isSelected = false
-            self.funcButton.isSelected = false
-        }
+        self.keyboardType = .System
+        self.voiceButton.isSelected = true
+        self.emojiButton.isSelected = false
+        self.funcButton.isSelected = false
+        voiceView.isHidden = true
         isShowKeyboard = true
         let userInfo = notification.userInfo!
         let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
@@ -156,10 +157,15 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let textViewHeight = heightWithFit()
         inputViewFrame.origin.y = (self.superview?.bounds.height)! - keyboardFrame.height - textViewHeight
         inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
-        UIView.animate(withDuration: duration) {
-            self.frame = inputViewFrame
-        }
         
+        UIView.animate(withDuration: duration, animations: {
+            self.frame = inputViewFrame
+            self.emojiView.y = self.emojiViewMaxHeight
+            self.funcsView.y = self.emojiViewMaxHeight
+        }) { (finish) in
+            self.emojiView.isHidden = true
+            self.funcsView.isHidden = true
+        }
     }
     
     @objc func keyboardWillHide(_ notification: Notification){
@@ -167,6 +173,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
             return
         }
         if self.keyboardType == .Record || self.keyboardType == .None{
+            voiceView.isHidden = false
             isShowKeyboard = false
             let userInfo = notification.userInfo!
             let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
@@ -196,7 +203,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
     func textViewDidChange(_ textView: UITextView) {
         let size = sizeThatFits(self.size)
-        let newFrame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height, width: size.width, height: size.height)
+        let newFrame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height - self.emojiViewMaxHeight, width: size.width, height: size.height + self.emojiViewMaxHeight)
         frameAnimated(newFrame)
         textView.scrollRangeToVisible(textView.selectedRange)
     }
@@ -278,31 +285,75 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
             
             case .Emoji:
                 self.textView.resignFirstResponder()
+                self.voiceView.isHidden = true
                 self.emojiView.isHidden = false
-                self.voiceButton.isSelected = false
+                self.voiceButton.isSelected = true
                 var inputViewFrame = self.frame
                 let textViewHeight = heightWithFit()
                 inputViewFrame.origin.y = (self.superview?.bounds.height)! - emojiViewMaxHeight - textViewHeight
                 inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
                 
-                UIView.animate(withDuration: MYDuration) {
+                UIView.animate(withDuration: MYDuration, animations: {
                     self.frame = inputViewFrame
+                    self.funcsView.y = inputViewFrame.size.height
                     self.emojiView.y = textViewHeight
+                }) { (finish) in
+                    self.funcsView.isHidden = true
                 }
+                    
+                
                 break
             case .System:
-                
-                self.textView.becomeFirstResponder()
-                UIView.animate(withDuration: MYDuration) {
-                    self.emojiView.y = self.emojiViewMaxHeight
+                if !self.textView.isFirstResponder {
+                    self.emojiButton.isSelected = false
+                    self.funcButton.isSelected = false
+                    self.textView.becomeFirstResponder()
+                    UIView.animate(withDuration: MYDuration, animations: {
+                        self.emojiView.y = self.emojiViewMaxHeight
+                        self.funcsView.y = self.emojiViewMaxHeight
+                    }) { (finish) in
+                        self.emojiView.isHidden = true
+                        self.funcsView.isHidden = true
+                    }
                 }
                 break
             case .Funcs:
+                self.voiceButton.isSelected = true
+                self.emojiButton.isSelected = false
+                self.funcsView.isHidden = false
+                if self.textView.isFirstResponder {
+                    self.textView.resignFirstResponder()
+                }
+                var inputViewFrame = self.frame
+                let textViewHeight = heightWithFit()
+                inputViewFrame.origin.y = (self.superview?.bounds.height)! - emojiViewMaxHeight - textViewHeight
+                inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
+                UIView.animate(withDuration: MYDuration, animations: {
+                    self.frame = inputViewFrame
+                    self.emojiView.y = inputViewFrame.size.height
+                    self.funcsView.y = textViewHeight
+                }) { (finsh) in
+                    self.emojiView.isHidden = true
+                }
+                
                 break
             case .Record:
                 self.emojiButton.isSelected = false
                 self.funcButton.isSelected = false
-                self.textView.resignFirstResponder()
+                if self.textView.isFirstResponder {
+                    self.textView.resignFirstResponder()
+                }else{
+                    self.voiceView.isHidden = false
+                    var inputViewFrame = self.frame
+                    let textViewHeight = heightWithFit()
+                    inputViewFrame.origin.x = initFrame.minX
+                    inputViewFrame.origin.y = initFrame.minY - (textViewHeight - initFrame.height)
+                    inputViewFrame.size.width = initFrame.width
+                    inputViewFrame.size.height = textViewHeight
+                    UIView.animate(withDuration: MYDuration) {
+                        self.frame = inputViewFrame
+                    }
+                }
                 break
             default:
                 break
@@ -341,11 +392,18 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         return view
     }()
     
+    private lazy var voiceView : MYVoiceTouchView = {
+        let view = MYVoiceTouchView()
+        
+        return view
+    }()
+    
     private lazy var voiceButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setImage(UIImage(named: "toggle_record"), for: .normal)
-        button.setImage(UIImage(named:"toggle_keyboard"), for: .selected)
+        button.setImage(UIImage(named: "toggle_record"), for: .selected)
+        button.setImage(UIImage(named:"toggle_keyboard"), for: .normal)
         button.addTarget(self, action: #selector(voiceButtonDown(_:)), for: .touchUpInside)
+        button.contentEdgeInsets = UIEdgeInsets.init(top: 2, left: 2, bottom: 2, right: 2)
         return button
     }()
     
@@ -362,6 +420,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         button.setImage(UIImage(named: "toggle_emoji"), for: .normal)
         button.setImage(UIImage(named: "toggle_keyboard"), for: .selected)
         button.addTarget(self, action: #selector(emojiButtonDown(_:)), for: .touchUpInside)
+        button.contentEdgeInsets = UIEdgeInsets.init(top: 2, left: 2, bottom: 2, right: 2)
         return button
     }()
     
@@ -376,8 +435,9 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     private lazy var funcsView : MYEmojiKeyboardView = {
         
         let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
-        view.backgroundColor = .gray
+        view.backgroundColor = UIColor.green
         view.isHidden = true
+        
         return view
     }()
     
