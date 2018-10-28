@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30DE6C79218441B300D543BB /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30DE6C78218441B300D543BB /* Media.xcassets */; };
+		30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */; };
+		30DE6C7F218552CC00D543BB /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DE6C7E218552CC00D543BB /* lame.framework */; };
+		30DE6C87218553F000D543BB /* MYConverAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DE6C86218553F000D543BB /* MYConverAudioFile.m */; };
 		C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */; };
 		C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */; };
 		C625E9972153818A0098C422 /* MYResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E9962153818A0098C422 /* MYResultModel.swift */; };
@@ -34,6 +38,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30DE6C78218441B300D543BB /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYAudioRecorder.swift; sourceTree = "<group>"; };
+		30DE6C7E218552CC00D543BB /* lame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = lame.framework; sourceTree = "<group>"; };
+		30DE6C812185536C00D543BB /* MY_Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MY_Demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		30DE6C85218553F000D543BB /* MYConverAudioFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYConverAudioFile.h; sourceTree = "<group>"; };
+		30DE6C86218553F000D543BB /* MYConverAudioFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYConverAudioFile.m; sourceTree = "<group>"; };
 		59ABE1D9540DA64FBADDE1E2 /* Pods-MY_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B386F20748E62FB0141D9B3 /* Pods-MY_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.release.xcconfig"; sourceTree = "<group>"; };
 		C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMapperCommonFunc.swift; sourceTree = "<group>"; };
@@ -70,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */,
+				30DE6C7F218552CC00D543BB /* lame.framework in Frameworks */,
 				C66316552181CF3E001D98F5 /* MYEasyHUDSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +88,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30DE6C7A2184432000D543BB /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				30DE6C802185534700D543BB /* ConverAudioFile */,
+				30DE6C7D218552B900D543BB /* Lame */,
+				30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		30DE6C7D218552B900D543BB /* Lame */ = {
+			isa = PBXGroup;
+			children = (
+				30DE6C7E218552CC00D543BB /* lame.framework */,
+			);
+			path = Lame;
+			sourceTree = "<group>";
+		};
+		30DE6C802185534700D543BB /* ConverAudioFile */ = {
+			isa = PBXGroup;
+			children = (
+				30DE6C812185536C00D543BB /* MY_Demo-Bridging-Header.h */,
+				30DE6C85218553F000D543BB /* MYConverAudioFile.h */,
+				30DE6C86218553F000D543BB /* MYConverAudioFile.m */,
+			);
+			path = ConverAudioFile;
+			sourceTree = "<group>";
+		};
 		8D9DBF1E12F07D73AC407CBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +200,7 @@
 		C6515CE02159C72F00B079E5 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				30DE6C7A2184432000D543BB /* Tool */,
 				C6515CEE2159D20600B079E5 /* Resources */,
 				C6515CED2159CEDF00B079E5 /* Category */,
 				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
@@ -185,6 +225,7 @@
 		C6515CEE2159D20600B079E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				30DE6C78218441B300D543BB /* Media.xcassets */,
 				C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */,
 			);
 			path = Resources;
@@ -280,6 +321,7 @@
 				C63D7D79214B4DC500713BDC /* LaunchScreen.storyboard in Resources */,
 				C663160A218174CF001D98F5 /* loading.gif in Resources */,
 				C63D7D76214B4DC500713BDC /* Assets.xcassets in Resources */,
+				30DE6C79218441B300D543BB /* Media.xcassets in Resources */,
 				C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +353,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MY_Demo/Pods-MY_Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -334,7 +376,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MY_Demo/Pods-MY_Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -356,10 +398,12 @@
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
 				C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */,
 				C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */,
+				30DE6C87218553F000D543BB /* MYConverAudioFile.m in Sources */,
 				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
 				C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */,
 				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,
 				C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */,
+				30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,12 +549,14 @@
 			baseConfigurationReference = 59ABE1D9540DA64FBADDE1E2 /* Pods-MY_Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 昌勇 蔡 (NFKLE3Y5N5)";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MY_Demo/Lib",
+					"$(PROJECT_DIR)/MY_Demo/Utils/Keyboard/Tool/Lame",
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = MY_Demo/Info.plist;
@@ -519,9 +565,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.koolearn.koolearnMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = com.koolearn.koolelkjhfjsd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_koolearn3;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MY_Demo/Utils/Keyboard/Tool/ConverAudioFile/MY_Demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -532,12 +580,14 @@
 			baseConfigurationReference = 8B386F20748E62FB0141D9B3 /* Pods-MY_Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 昌勇 蔡 (NFKLE3Y5N5)";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MY_Demo/Lib",
+					"$(PROJECT_DIR)/MY_Demo/Utils/Keyboard/Tool/Lame",
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = MY_Demo/Info.plist;
@@ -546,9 +596,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.koolearn.koolearnMotion;
+				PRODUCT_BUNDLE_IDENTIFIER = com.koolearn.koolelkjhfjsd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_koolearn3;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MY_Demo/Utils/Keyboard/Tool/ConverAudioFile/MY_Demo-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
