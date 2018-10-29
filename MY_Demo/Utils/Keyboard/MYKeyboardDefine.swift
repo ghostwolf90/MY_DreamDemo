@@ -64,7 +64,7 @@ var MYEmojiPageMaxColumn : CGFloat {
 let MYEmojiButtonWH : CGFloat = 32.0//一个 emoji button 的大小
 let MYEmojiButtonVerticalMargin : CGFloat = 16.0//上下间距
 //富文本表情,标记
-let MYAddEmojiTag : String = "EmojiTextGeneralTag"
+let MYAddEmojiTag : String = "MYEmojiTextGeneralTag"
 //预览页面
 let MYEmojiPreviewTopSpace : CGFloat = 15.0//距离顶部间距
 let MYEmojiPreviewImageWH : CGFloat = 30.0//图片宽高

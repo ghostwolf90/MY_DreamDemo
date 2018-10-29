@@ -95,7 +95,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                             self?.delegate?.recordFileFaile(name: fileName ?? "")
                         }
                     }
-                    
+                     
                 }
             }
             //打开定时器,监测声波
@@ -155,7 +155,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         let result = powf(6.0, 0.05*peakPower)
         self.lowPassResults = CGFloat(0.5 * result) + 0.5 * self.lowPassResults
         let currentLevel = Int(lowPassResults/0.1)
-         
+        
         self.delegate?.recordSoundLevel(currentLevel)
         
     }
