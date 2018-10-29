@@ -35,6 +35,7 @@
 		C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */; };
 		C663165F2186A5B9001D98F5 /* MYConverAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = C663165E2186A5B9001D98F5 /* MYConverAudioFile.m */; };
 		C66316642186B5C9001D98F5 /* MYRecordHandled.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316632186B5C9001D98F5 /* MYRecordHandled.swift */; };
+		C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316652186E4A7001D98F5 /* MYVoiceTouchTipView.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		C663165D2186A5B9001D98F5 /* MYConverAudioFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYConverAudioFile.h; sourceTree = "<group>"; };
 		C663165E2186A5B9001D98F5 /* MYConverAudioFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYConverAudioFile.m; sourceTree = "<group>"; };
 		C66316632186B5C9001D98F5 /* MYRecordHandled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYRecordHandled.swift; sourceTree = "<group>"; };
+		C66316652186E4A7001D98F5 /* MYVoiceTouchTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYVoiceTouchTipView.swift; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
 				C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */,
 				C66316632186B5C9001D98F5 /* MYRecordHandled.swift */,
+				C66316652186E4A7001D98F5 /* MYVoiceTouchTipView.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,
 				C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */,
 				30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */,
+				C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

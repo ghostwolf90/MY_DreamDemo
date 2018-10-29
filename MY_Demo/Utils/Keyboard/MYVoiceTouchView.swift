@@ -25,6 +25,8 @@ protocol MYVoiceTouchViewDelegate : NSObjectProtocol {
     func touchTimeShort()
     /// 发送录音事件
     func sendVoiceInteractionEvent()
+    /// 是否展示取消
+    func isShowCancen(_ isCancel : Bool)
 }
 
 class MYVoiceTouchView: UIView {
@@ -37,6 +39,7 @@ class MYVoiceTouchView: UIView {
     private var isUpSlide : Bool = false
     /// 计时,1分钟
     private var timeCount : NSInteger = 0
+    private var timer : Timer?
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -93,7 +96,8 @@ class MYVoiceTouchView: UIView {
             beganEvent()
             self.isUpSlide = false
             //开启定时器
-            self.timer.fire()
+            self.timer = createTimer()
+            self.timer?.fire()
             //展示HUD视图
             self.delegate?.touchBegan()
         }else if (gestureRecognizer.state == .ended){
@@ -107,11 +111,12 @@ class MYVoiceTouchView: UIView {
                 //上滑
                 self.isUpSlide = true
             }
-            
+            self.delegate?.isShowCancen(self.isUpSlide)
         }
     }
     
     @objc private func timeEvent(){
+         
         if self.timeCount == 1 {
             //开始录音
             self.delegate?.sendVoiceInteractionEvent()
@@ -158,7 +163,8 @@ class MYVoiceTouchView: UIView {
     
     
     private func invalidateTimeer() {
-        self.timer.invalidate()
+        self.timer?.invalidate()
+        self.timer = nil
         self.timeCount = 0
         //隐藏HUD
         endEvent()
@@ -181,11 +187,12 @@ class MYVoiceTouchView: UIView {
         return button
     }()
     
-    private lazy var timer : Timer = {
+    private func createTimer() -> Timer{
+        
         let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(timeEvent), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .default)
         return timer
-    }()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

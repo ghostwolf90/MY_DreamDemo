@@ -31,14 +31,21 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     var isEndRecord_MP3 : Bool = false
     /// 判断当前录音机状态
     private(set) var isRecording : Bool = false
+    /// 获取文件名
+    private(set) var fileName : String?
     /// 录音机代理
     weak var delegate : MYAudioRecorderDelegate?
+    /// 缓存路径
     private var cachePath : String?
+    
     private var mp3Path : String = ""
     private var cafPath : String = ""
-    
+    /// 检测声波
+    private var levelTimer : Timer?
+    /// 录音机
     private var audioRecorder : AVAudioRecorder?
-    
+    /// 声波等级
+    private var lowPassResults : CGFloat = 0
     init(cachePath : String?) {
         super.init()
         if cachePath == nil {
@@ -92,14 +99,16 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                 }
             }
             //打开定时器,监测声波
-            self.levelTimer.fire()
+            self.levelTimer = createLevelTimer()
+            self.levelTimer?.fire()
         }
         
     }
     
     public func stop() {
         self.isRecording = false
-        self.levelTimer.invalidate()
+        self.levelTimer?.invalidate()
+        self.levelTimer = nil
         self.audioRecorder?.stop()
     }
     
@@ -110,7 +119,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         //取消转换
         MYConverAudioFile.sharedInstance().cancelSendEndRecord()
         playbackSessionModel()
-        
+        deleteLastRecord()
     }
     
     /// 删除最后录音文件
@@ -140,7 +149,14 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     
     //MARK: 响应方法
     /// 监测录音机声波
-    @objc private func levelTimerCallback() {
+    @objc private func levelTimerCallback(_ timer : Timer) {
+        self.audioRecorder?.updateMeters()
+        let peakPower = self.audioRecorder?.peakPower(forChannel: 0) ?? 0
+        let result = powf(6.0, 0.05*peakPower)
+        self.lowPassResults = CGFloat(0.5 * result) + 0.5 * self.lowPassResults
+        let currentLevel = Int(lowPassResults/0.1)
+         
+        self.delegate?.recordSoundLevel(currentLevel)
         
     }
     
@@ -156,6 +172,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         }
     }
     
+    /// 删除 mp3文件
     private func deleteMP3File() {
         let path = self.mp3Path
         DispatchQueue.global().async {
@@ -163,6 +180,21 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                 try? FileManager.default.removeItem(atPath: path)
             }
         }
+    }
+    
+    /// 获取当前录音机生成的文件名 以时间戳为名字(毫秒)
+    private func createFileName() -> String {
+        let date = Date(timeIntervalSinceNow: 0)
+        let timeInterval: TimeInterval = date.timeIntervalSince1970
+        let millisecond = CLongLong(round(timeInterval*1000))
+        return "\(millisecond)"
+    }
+    
+    /// 生成定时器
+    private func createLevelTimer() -> Timer {
+        let timer = Timer.init(timeInterval: 0.2, target: self, selector: #selector(levelTimerCallback(_:)), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: .default)
+        return timer
     }
     
     //MARK: 创建录音机
@@ -226,11 +258,11 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     
     /// 创建两个文件路径,便于转换
     private func setCafPath(_ rootPath : String) {
-        if fileName != nil {
-            self.fileName = nil
-        }
+        self.fileName = createFileName()
         let cafFileName = "\(self.fileName!).caf"
         let mp3FileName = "\(self.fileName!).mp3"
+        print(cafFileName)
+        print(mp3FileName)
         self.cafPath = rootPath + "/" + cafFileName
         self.mp3Path = rootPath + "/" + mp3FileName
     }
@@ -247,20 +279,8 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         return setting
     }
    
-    /// 获取当前录音机生成的文件名 以时间戳为名字(毫秒)
-    private(set) var fileName : String? = {
-        let date = Date(timeIntervalSinceNow: 0)
-        let timeInterval: TimeInterval = date.timeIntervalSince1970
-        let millisecond = CLongLong(round(timeInterval*1000))
-        return "\(millisecond)"
-    }()
-    
     //MARK: 懒加载
     
-    private var levelTimer : Timer = {
-        let timer = Timer.init(timeInterval: 0.2, target: self, selector: #selector(levelTimerCallback), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer, forMode: .default)
-        return timer
-    }()
+    
 
 }
