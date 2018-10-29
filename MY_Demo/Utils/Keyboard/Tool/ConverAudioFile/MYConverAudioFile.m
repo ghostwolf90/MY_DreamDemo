@@ -12,13 +12,13 @@
 
 @property (nonatomic, assign) BOOL stopRecord;
 @property (nonatomic, assign) BOOL cancelRecord;
-    
+
 @end
 
 static MYConverAudioFile *_instance = nil;
 
 @implementation MYConverAudioFile
-    
+
 + (instancetype)sharedInstance {
     
     static dispatch_once_t onceToken;
@@ -27,8 +27,8 @@ static MYConverAudioFile *_instance = nil;
     });
     return _instance;
 }
-    
-    
+
+
 - (void)conventToMp3WithCafFilePath:(NSString *)cafFilePath mp3FilePath:(NSString *)mp3FilePath sampleRate:(int)sampleRate callback:(void(^)(MYConverAudioFileResult *result))callback {
     self.cancelRecord = NO;
     __weak typeof(self) weakself = self;
@@ -128,18 +128,22 @@ static MYConverAudioFile *_instance = nil;
     });
     
 }
-    
-    /**
-     send end record signal
-     */
+
+/**
+ send end record signal
+ */
 - (void)sendEndRecord {
     self.stopRecord = YES;
 }
-    
+
 - (void)cancelSendEndRecord{
     self.stopRecord = YES;
     self.cancelRecord = YES;
 }
-    
+
+
+@end
+
+@implementation MYConverAudioFileResult
 
 @end

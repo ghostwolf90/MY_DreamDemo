@@ -29,29 +29,27 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     var qualityKey : AVAudioQuality = .min
     /// 是否录制完毕后 转 mp3 默认: 边录边转
     var isEndRecord_MP3 : Bool = false
-    /// 获取当前录音机生成的文件名
-    var currentFileName : String {
-        get{
-            return self.fileName!
-        }
-    }
     /// 判断当前录音机状态
-    var isRecording : Bool  {
-        get{
-            return self.recording
-        }
-    }
+    private(set) var isRecording : Bool = false
     /// 录音机代理
     weak var delegate : MYAudioRecorderDelegate?
     private var cachePath : String?
     private var mp3Path : String = ""
     private var cafPath : String = ""
-    private var recording : Bool = false
+    
     private var audioRecorder : AVAudioRecorder?
+    
     init(cachePath : String?) {
+        super.init()
         if cachePath == nil {
             self.cachePath = cachePath
         }
+        createRecord ()
+    }
+    
+    override init() {
+        super.init()
+        createRecord ()
     }
     
     //MARK: 公开方法
@@ -59,10 +57,13 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     /// 开始录音
     public func record() {
         //判断是否有声音播放
-        if !self.recording {
-            self.recording = true
+        if !self.isRecording {
+            self.isRecording = true
             //创建一个录音机,并开始录音
-            createRecord()
+            if self.audioRecorder == nil {
+                createRecord()
+            }
+            self.audioRecorder?.record()
             if !self.isEndRecord_MP3 {
                 //边录边转
                 MYConverAudioFile.sharedInstance().conventToMp3(withCafFilePath: self.cafPath, mp3FilePath: self.mp3Path, sampleRate: Int32(self.sampleRateKey)) {[weak self] (result) in
@@ -97,7 +98,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     }
     
     public func stop() {
-        self.recording = false
+        self.isRecording = false
         self.levelTimer.invalidate()
         self.audioRecorder?.stop()
     }
@@ -174,7 +175,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
             self.audioRecorder?.delegate = self
             self.audioRecorder?.isMeteringEnabled = true
             self.audioRecorder?.prepareToRecord()
-            self.audioRecorder?.record()//开始录音
+             
         } catch  {
             print("录音机创建失败")
         }
@@ -245,9 +246,9 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         setting[AVEncoderAudioQualityKey] = NSNumber(value: self.qualityKey.rawValue)
         return setting
     }
-    
-    /// 创建文件名 以时间戳为名字(毫秒)
-    private var fileName : String? = {
+   
+    /// 获取当前录音机生成的文件名 以时间戳为名字(毫秒)
+    private(set) var fileName : String? = {
         let date = Date(timeIntervalSinceNow: 0)
         let timeInterval: TimeInterval = date.timeIntervalSince1970
         let millisecond = CLongLong(round(timeInterval*1000))

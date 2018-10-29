@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         inputView.frame = CGRect.init(x: 0, y: MYSCREEN_HEIGHT  - MYSafeAreaHeight - height, width: UIScreen.main.bounds.width, height: height)
         inputView.initFrame = inputView.frame
         
-        
+         
         
         self.view.addSubview(inputView)
         

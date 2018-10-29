@@ -8,10 +8,34 @@
 
 import UIKit
 import AVFoundation
+
+protocol MYVoiceTouchViewDelegate : NSObjectProtocol {
+    
+    /// 准备初始化录音机
+    func initRecord()
+    /// 开始录音
+    func touchBegan()
+    /// 录音结束
+    func touchEnd()
+    /// 上滑取消
+    func touchUpSlideEnd()
+    /// 时间到,录音结束
+    func touchTimeEnd()
+    /// 录音时间太短
+    func touchTimeShort()
+    /// 发送录音事件
+    func sendVoiceInteractionEvent()
+}
+
 class MYVoiceTouchView: UIView {
     
+    /// 代理
+    weak var delegate : MYVoiceTouchViewDelegate?
+    /// 滑动距离,负数
     var slidArea : CGFloat = -MYKeyboardSpace20
+    /// 是否滑动到上方,上滑取消判断
     private var isUpSlide : Bool = false
+    /// 计时,1分钟
     private var timeCount : NSInteger = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +66,14 @@ class MYVoiceTouchView: UIView {
             let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
             if authStatus == .notDetermined {
                 //初始化录音机
+                AVCaptureDevice.requestAccess(for: .audio) {[weak self] (granted) in
+                    if granted {
+                        print("点击允许访问麦克风")
+                        self?.delegate?.initRecord()
+                    }else{
+                        print("点击拒绝访问麦克风")
+                    }
+                }
                 return
             }
             if authStatus == .denied {
@@ -63,6 +95,7 @@ class MYVoiceTouchView: UIView {
             //开启定时器
             self.timer.fire()
             //展示HUD视图
+            self.delegate?.touchBegan()
         }else if (gestureRecognizer.state == .ended){
             voiceEndEvent()
         }
@@ -81,10 +114,12 @@ class MYVoiceTouchView: UIView {
     @objc private func timeEvent(){
         if self.timeCount == 1 {
             //开始录音
+            self.delegate?.sendVoiceInteractionEvent()
         }
         self.timeCount += 1
         if self.timeCount == 61 {
             //时间到,结束录音
+            self.delegate?.touchTimeEnd()
             invalidateTimeer()
         }
     }
@@ -107,11 +142,14 @@ class MYVoiceTouchView: UIView {
         
         if self.timeCount <= 1 {
             //时间太短
+            self.delegate?.touchTimeShort()
         }else{
             if self.isUpSlide {
                 //上滑取消
+                self.delegate?.touchUpSlideEnd()
             }else{
                 //触摸结束
+                self.delegate?.touchEnd()
             }
         }
         invalidateTimeer()

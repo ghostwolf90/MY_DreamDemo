@@ -12,25 +12,26 @@ import UIKit
 class MYKeyboardInputView: UIView,UITextViewDelegate{
     /// 初始化 frame
     var initFrame : CGRect = .zero
-    /// 获取键盘是否展示状态
-    private(set) var isShowKeyboard : Bool = false
     /// 获取键盘默认宽高
     var defineHeight : CGFloat {
         return heightWithFit()
     }
+    /// 获取键盘是否展示状态
+    private(set) var isShowKeyboard : Bool = false
     
+    ///初始化
     init() {
-        self.keyboardType = .None
         super.init(frame: .zero)
         addInit()
     }
+    /// 初始化
     override init(frame: CGRect) {
-        self.keyboardType = .None
         super.init(frame: frame)
         self.initFrame = frame
         addInit()
     }
     
+    /// 初始化控件,增加通知
     private func addInit(){
         self.layer.masksToBounds = true
         ///设置为YES的话可以阻止同一个window中其他控件与他响应
@@ -39,7 +40,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         layer.borderWidth = 0.5
         layer.borderColor = MYColorForRGB(211, 211, 211).cgColor
         //默认宽高
-        width = UIScreen.main.bounds.size.width
+        width = UIScreen.main.bounds.width
         height = heightWithFit()
         addSubview(emojiView)
         addSubview(funcsView)
@@ -53,6 +54,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    /// 重写layout frame 改变后重新布局
     override func layoutSubviews() {
         super.layoutSubviews()
         calculateWidgetFrame()
@@ -71,15 +73,18 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     }
     
     // MARK: - 公开方法
+    
+    // 清除文本
     func clearText()  {
         self.textView.text = nil
         self.textView.font = UIFont.systemFont(ofSize: MYTextViewTextFont)
-        
+        // 收回键盘
         resignTextViewResponder()
     }
     
-    // MARK: - 计算高度
+    // MARK: - 计算高度,frame
     
+    /// 通过最大行和最小行计算textView 高度
     func heightWithFit() -> CGFloat {
         let textViewHeight = textView.layoutManager.usedRect(for: textView.textContainer).size.height + MYTextViewTextDefineHeight
 
@@ -90,12 +95,14 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         return calculateHeight + MYTextViewTopBottomSpace * 2
     }
     
+    /// 计算行高
     private func heightWithLine(_ lineNumber : Int) -> CGFloat{
         let onelineStr = NSString()
         let onelineRect = onelineStr.boundingRect(with: CGSize(width: textView.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: MYTextViewTextFont)], context: nil)
         return onelineRect.size.height * CGFloat(lineNumber) + MYTextViewTextDefineHeight
     }
     
+    /// 计算各个控件的 frame
     private func calculateWidgetFrame(){
         let left = MYEmojiBtnWH + MYInputViewWidgetSpace * 2.0
         let top = MYTextViewTopBottomSpace
@@ -110,9 +117,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let height = totleHeight - MYTextViewTopBottomSpace * 2.0
         textView.frame = CGRect.init(x: left, y: top, width: width, height: height)
         voiceView.frame = textView.frame
+        
     }
     
     // MARK: - 方法响应
+    
+    /// 录音按钮响应方法
     @objc func voiceButtonDown(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
@@ -122,6 +132,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         }
         
     }
+    
+    ///emoji 按钮响应方法
     @objc func emojiButtonDown(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
@@ -131,6 +143,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         }
         
     }
+    
+    /// 更多按钮响应
     @objc func moreFuncButtonDown(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
@@ -139,6 +153,9 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
             self.keyboardType = .System
         }
     }
+    
+    
+    // MARK: - 键盘通知 WillShow;WillHide
     
     @objc func keyboardWillShow(_ notification: Notification){
         if self.superview == nil {
@@ -157,7 +174,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let textViewHeight = heightWithFit()
         inputViewFrame.origin.y = (self.superview?.bounds.height)! - keyboardFrame.height - textViewHeight
         inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
-        
+        inputViewFrame.origin.x = -(self.superview?.left ?? 0)
         UIView.animate(withDuration: duration, animations: {
             self.frame = inputViewFrame
             self.emojiView.y = self.emojiViewMaxHeight
@@ -223,16 +240,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let touchPoint = touch?.location(in: self)
         if !self.bounds.contains(touchPoint!) {
             if self.isShowKeyboard {
-                isShowKeyboard = false
-                self.emojiButton.isSelected = false
-                self.funcButton.isSelected = false
-                UIView.animate(withDuration: MYDuration, animations: {[weak self] in
-                    self?.frame = (self?.initFrame)!
-                    self?.emojiView.y = (self?.emojiViewMaxHeight)!
-                
-                }) { (complete) in
-                    self.emojiView.isHidden = true
-                }
+                self.keyboardType = .Record
                 resignTextViewResponder()
             }
         }else{
@@ -241,6 +249,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         
     }
     
+    /// 注销键盘第一响应
     private func resignTextViewResponder()  {
         //改变按钮状态
         setNeedsLayout()
@@ -249,6 +258,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
     // MARK: - 自适应键盘高度
     
+    /// 重写 sizefit 方法
     override func sizeToFit() {
         let size = sizeThatFits(self.size)
         self.frame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height, width: size.width, height: size.height)
@@ -275,7 +285,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
     // MARK: - 私有方法
     
-    private var keyboardType : MYKeyboardInputViewEnum.KeyboardType {
+    /// 通过 keyboardType 值,计算动画,改变布局
+    private var keyboardType : MYKeyboardInputViewEnum.KeyboardType = .None {
         willSet{
             if keyboardType == newValue {
                 return
@@ -284,6 +295,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
             switch newValue {
             
             case .Emoji:
+                self.isShowKeyboard = true
                 self.textView.resignFirstResponder()
                 self.voiceView.isHidden = true
                 self.emojiView.isHidden = false
@@ -318,6 +330,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
                 }
                 break
             case .Funcs:
+                self.isShowKeyboard = true
                 self.voiceButton.isSelected = true
                 self.emojiButton.isSelected = false
                 self.funcsView.isHidden = false
@@ -350,8 +363,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
                     inputViewFrame.origin.y = initFrame.minY - (textViewHeight - initFrame.height)
                     inputViewFrame.size.width = initFrame.width
                     inputViewFrame.size.height = textViewHeight
-                    UIView.animate(withDuration: MYDuration) {
+                    
+                    UIView.animate(withDuration: MYDuration, animations: {
                         self.frame = inputViewFrame
+                    }) { (finish) in
+                        self.emojiView.isHidden = true
+                        self.funcsView.isHidden = true
                     }
                 }
                 break
@@ -362,6 +379,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         }
     }
     
+    /// 计算 emojiview 最大高度
     private var emojiViewMaxHeight : CGFloat {
         get{
             var bottomInset : CGFloat = 0.0
@@ -394,7 +412,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
     private lazy var voiceView : MYVoiceTouchView = {
         let view = MYVoiceTouchView()
-        
+        view.delegate = self.recordHandle
         return view
     }()
     
@@ -441,6 +459,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         return view
     }()
     
+    private lazy var recordHandle : MYRecordHandled = {
+        let handle = MYRecordHandled()
+        return handle
+    }()
    
     
     required init?(coder aDecoder: NSCoder) {
