@@ -76,7 +76,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                 MYConverAudioFile.sharedInstance().conventToMp3(withCafFilePath: self.cafPath, mp3FilePath: self.mp3Path, sampleRate: Int32(self.sampleRateKey)) {[weak self] (result) in
                     let fileManager = FileManager.default
                     if fileManager.fileExists(atPath: result.cafPath) {
-                        print("删除 caf 文件: \(result.cafPath)")
+                        print("回调 删除 caf 文件: \(result.cafPath)")
                         try? fileManager.removeItem(atPath: result.cafPath)
                     }
                     let resulePath = result.resultPath as NSString
@@ -86,10 +86,10 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                         self?.delegate?.recordFileSuccess(path: result.resultPath, time: 0, name: fileName ?? "")
                     }else {
                         if !result.isCancel {
-                            print("MP3转换失败\n")
+                            print("回调 MP3转换失败\n")
                             //删除转换的 mp3地址
                             if fileManager.fileExists(atPath: result.resultPath) {
-                                print("删除 mp3 文件: \(result.resultPath)")
+                                print("回调 删除 mp3 文件: \(result.resultPath)")
                                 try? fileManager.removeItem(atPath: result.resultPath)
                             }
                             self?.delegate?.recordFileFaile(name: fileName ?? "")
@@ -167,6 +167,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         let path = self.cafPath
         DispatchQueue.global().async {
             if FileManager.default.fileExists(atPath: path) {
+                print("删除 caf 文件\(path)")
                 try? FileManager.default.removeItem(atPath: path)
             }
         }
@@ -177,6 +178,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         let path = self.mp3Path
         DispatchQueue.global().async {
             if FileManager.default.fileExists(atPath: path) {
+                print("删除 mp3 文件\(path)")
                 try? FileManager.default.removeItem(atPath: path)
             }
         }

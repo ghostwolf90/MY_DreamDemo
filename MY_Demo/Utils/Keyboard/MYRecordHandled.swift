@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate{
     
     
@@ -37,7 +39,7 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     func touchUpSlideEnd() {
         print("上滑取消")
         self.audioRecord?.cancelSend()
-        self.showView.isShowCancel()
+        self.showView.hiddenView()
     }
     
     func touchTimeEnd() {

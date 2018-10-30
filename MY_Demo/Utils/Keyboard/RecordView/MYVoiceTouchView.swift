@@ -182,7 +182,7 @@ class MYVoiceTouchView: UIView {
         button.setTitleColor(MYColorForRGB(92, 92, 92), for: .selected)
         button.titleLabel?.font = UIFont.init(name: "Helvetica-Bold", size: 17)
         let longPress = UILongPressGestureRecognizer.init(target: self, action: #selector(voiceButtontnLong(_:)))
-        longPress.minimumPressDuration = 0.3
+        longPress.minimumPressDuration = 0.2
         button.addGestureRecognizer(longPress)
         return button
     }()

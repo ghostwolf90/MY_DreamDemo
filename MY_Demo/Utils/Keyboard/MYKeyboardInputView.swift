@@ -7,7 +7,8 @@
 //
 
 import UIKit
- 
+
+
 
 class MYKeyboardInputView: UIView,UITextViewDelegate{
     /// 初始化 frame
@@ -79,6 +80,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         self.textView.text = nil
         self.textView.font = UIFont.systemFont(ofSize: MYTextViewTextFont)
         // 收回键盘
+        //改变 keyboard 状态
+        self.keyboardType = .Record
         resignTextViewResponder()
     }
     
@@ -192,6 +195,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         if self.keyboardType == .Record || self.keyboardType == .None{
             voiceView.isHidden = false
             isShowKeyboard = false
+            voiceButton.isSelected = false
             let userInfo = notification.userInfo!
             let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
             var inputViewFrame = self.frame
