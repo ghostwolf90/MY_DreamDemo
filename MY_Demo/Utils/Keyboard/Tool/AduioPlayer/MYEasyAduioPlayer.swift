@@ -61,7 +61,7 @@ class MYEasyAduioPlayer: NSObject {
     
     private override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted(_:)), name: AVAudioSession.interruptionNotification, object: nil)//打断
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted(_:)), name: AVAudioSession.interruptionNotification, object: nil)//声音被打断,来电,闹铃等
         NotificationCenter.default.addObserver(self, selector: #selector(audioRouteChangeListen(_:)), name: AVAudioSession.routeChangeNotification, object: nil)//耳机拔插
     }
     

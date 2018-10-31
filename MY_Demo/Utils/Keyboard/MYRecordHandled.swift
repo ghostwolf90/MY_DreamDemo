@@ -68,11 +68,11 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     }
     
     func recordFileSuccess(path: String, time: NSInteger, name: String) {
-        
+        print("\(path)  \(time)   \(name)")
     }
     
     func recordFileFaile(name: String) {
-        
+        print(name)
     }
     
     // MARK: - 创建录音机

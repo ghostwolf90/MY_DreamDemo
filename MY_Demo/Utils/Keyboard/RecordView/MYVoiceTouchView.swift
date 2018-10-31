@@ -55,6 +55,8 @@ class MYVoiceTouchView: UIView {
         layer.borderWidth = 0.5
         layer.borderColor = MYColorForRGB(219, 219, 219).cgColor
         addSubview(self.voiceButton)
+        NotificationCenter.default.addObserver(self, selector:#selector(enterForeground(_:)) , name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground(_:)), name: AVAudioSession.interruptionNotification, object: nil)//声音被打断,来电,闹铃等
     }
     
     override func layoutSubviews() {
@@ -101,7 +103,10 @@ class MYVoiceTouchView: UIView {
             //展示HUD视图
             self.delegate?.touchBegan()
         }else if (gestureRecognizer.state == .ended){
-            voiceEndEvent()
+            if self.voiceButton.isSelected {
+               voiceEndEvent()
+            }
+            
         }
         if self.voiceButton.isSelected {
             let point = gestureRecognizer.location(in: self.voiceButton)
@@ -115,6 +120,9 @@ class MYVoiceTouchView: UIView {
         }
     }
     
+    // MARK: - 响应方法
+    
+    /// 定时器响应
     @objc private func timeEvent(){
          
         if self.timeCount == 1 {
@@ -126,6 +134,12 @@ class MYVoiceTouchView: UIView {
             //时间到,结束录音
             self.delegate?.touchTimeEnd()
             invalidateTimeer()
+        }
+    }
+    
+    @objc private func enterForeground(_ notification: Notification) {
+        if self.voiceButton.isSelected {
+            voiceEndEvent()
         }
     }
     
@@ -143,6 +157,7 @@ class MYVoiceTouchView: UIView {
         layer.borderColor = MYColorForRGB(219, 219, 219).cgColor
     }
     
+    /// 触摸结束
     private func voiceEndEvent() {
         
         if self.timeCount <= 1 {
@@ -160,13 +175,11 @@ class MYVoiceTouchView: UIView {
         invalidateTimeer()
     }
     
-    
-    
+    /// 取消定时器,结束事件
     private func invalidateTimeer() {
         self.timer?.invalidate()
         self.timer = nil
         self.timeCount = 0
-        //隐藏HUD
         endEvent()
     }
     
@@ -187,11 +200,16 @@ class MYVoiceTouchView: UIView {
         return button
     }()
     
+    //创建定时器
     private func createTimer() -> Timer{
         
         let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(timeEvent), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .default)
         return timer
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

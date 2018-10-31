@@ -83,7 +83,8 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                     let extenstionPanth = resulePath.lastPathComponent
                     let fileName = extenstionPanth.components(separatedBy: ".").first
                     if result.isSuccess {
-                        self?.delegate?.recordFileSuccess(path: result.resultPath, time: 0, name: fileName ?? "")
+                        let time =  MYEasyAduioPlayer.shared.getAudioDuration(with: URL.init(fileURLWithPath: result.resultPath))
+                        self?.delegate?.recordFileSuccess(path: result.resultPath, time: time, name: fileName ?? "")
                     }else {
                         if !result.isCancel {
                             print("MP3转换失败\n")
@@ -142,7 +143,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
             playbackSessionModel()
             self.audioRecorder = nil
             DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-             MYConverAudioFile.sharedInstance().cancelSendEndRecord()
+             MYConverAudioFile.sharedInstance().sendEndRecord()
             }
         }
     }
