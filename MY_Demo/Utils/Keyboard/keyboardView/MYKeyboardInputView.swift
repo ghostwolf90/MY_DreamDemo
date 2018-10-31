@@ -386,12 +386,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     /// 计算 emojiview 最大高度
     private var emojiViewMaxHeight : CGFloat {
         get{
-            var bottomInset : CGFloat = 0.0
-            if #available(iOS 11.0, *) {
-                bottomInset = (UIApplication.shared.delegate?.window??.safeAreaInsets.bottom)!
-            }
             
-            return (bottomInset + MYStickerTopSpace + MYStickerScrollerHeight + MYStickerControlPageTopBottomSpace*2 + MYStickerControlPageHeight + MYStickerSenderBtnHeight)
+            return (safeAreaBottom() + MYStickerTopSpace + MYStickerScrollerHeight + MYStickerControlPageTopBottomSpace*2 + MYStickerControlPageHeight + MYStickerSenderBtnHeight)
         }
     }
     

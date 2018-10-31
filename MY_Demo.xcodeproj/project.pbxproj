@@ -11,6 +11,10 @@
 		30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */; };
 		30DE6C7F218552CC00D543BB /* lame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DE6C7E218552CC00D543BB /* lame.framework */; };
 		C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */; };
+		C6253EF92189BFAA00225EE6 /* MYEmojiPackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6253EF82189BFAA00225EE6 /* MYEmojiPackageModel.swift */; };
+		C6253EFC2189C00B00225EE6 /* MYKeyboardBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6253EFB2189C00B00225EE6 /* MYKeyboardBundle.bundle */; };
+		C6253EFE2189C04700225EE6 /* MYMatchingEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6253EFD2189C04700225EE6 /* MYMatchingEmojiManager.swift */; };
+		C6253F002189C6D100225EE6 /* MYEmojiPageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6253EFF2189C6D100225EE6 /* MYEmojiPageScrollView.swift */; };
 		C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */; };
 		C625E9972153818A0098C422 /* MYResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E9962153818A0098C422 /* MYResultModel.swift */; };
 		C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */; };
@@ -29,7 +33,6 @@
 		C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */; };
 		C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */; };
 		C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */; };
-		C6515CF22159D36B00B079E5 /* MYKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */; };
 		C663160A218174CF001D98F5 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6631609218174CF001D98F5 /* loading.gif */; };
 		C66316552181CF3E001D98F5 /* MYEasyHUDSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */; };
 		C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */; };
@@ -47,6 +50,10 @@
 		59ABE1D9540DA64FBADDE1E2 /* Pods-MY_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		8B386F20748E62FB0141D9B3 /* Pods-MY_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MY_Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MY_Demo/Pods-MY_Demo.release.xcconfig"; sourceTree = "<group>"; };
 		C604700221509EF70010026A /* ObjectMapperCommonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMapperCommonFunc.swift; sourceTree = "<group>"; };
+		C6253EF82189BFAA00225EE6 /* MYEmojiPackageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYEmojiPackageModel.swift; sourceTree = "<group>"; };
+		C6253EFB2189C00B00225EE6 /* MYKeyboardBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MYKeyboardBundle.bundle; sourceTree = "<group>"; };
+		C6253EFD2189C04700225EE6 /* MYMatchingEmojiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYMatchingEmojiManager.swift; sourceTree = "<group>"; };
+		C6253EFF2189C6D100225EE6 /* MYEmojiPageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiPageScrollView.swift; sourceTree = "<group>"; };
 		C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MYObservable+ObjectMapper.swift"; sourceTree = "<group>"; };
 		C625E9962153818A0098C422 /* MYResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYResultModel.swift; sourceTree = "<group>"; };
 		C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiKeyboardView.swift; sourceTree = "<group>"; };
@@ -67,7 +74,6 @@
 		C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardInputView.swift; sourceTree = "<group>"; };
 		C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardImageExtension.swift; sourceTree = "<group>"; };
 		C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardViewExtension.swift; sourceTree = "<group>"; };
-		C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MYKeyboard.bundle; sourceTree = "<group>"; };
 		C6631609218174CF001D98F5 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MYEasyHUDSDK.framework; sourceTree = "<group>"; };
 		C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYVoiceTouchView.swift; sourceTree = "<group>"; };
@@ -147,6 +153,35 @@
 			path = ObjectMapper;
 			sourceTree = "<group>";
 		};
+		C6253EF121893C0900225EE6 /* keyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				C6253EFA2189BFD700225EE6 /* Subview */,
+				C6253EF72189BF9B00225EE6 /* Model */,
+				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
+				C66316632186B5C9001D98F5 /* MYRecordHandled.swift */,
+			);
+			path = keyboardView;
+			sourceTree = "<group>";
+		};
+		C6253EF72189BF9B00225EE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C6253EF82189BFAA00225EE6 /* MYEmojiPackageModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C6253EFA2189BFD700225EE6 /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
+				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
+				C6253EFF2189C6D100225EE6 /* MYEmojiPageScrollView.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
 		C63D7D62214B4DC300713BDC = {
 			isa = PBXGroup;
 			children = (
@@ -207,15 +242,12 @@
 		C6515CE02159C72F00B079E5 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				C6253EF121893C0900225EE6 /* keyboardView */,
 				C66316672186F524001D98F5 /* RecordView */,
 				30DE6C7A2184432000D543BB /* Tool */,
 				C6515CEE2159D20600B079E5 /* Resources */,
 				C6515CED2159CEDF00B079E5 /* Category */,
-				C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */,
 				C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */,
-				C6515CE12159C7C100B079E5 /* MYTextView.swift */,
-				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
-				C66316632186B5C9001D98F5 /* MYRecordHandled.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -233,8 +265,9 @@
 		C6515CEE2159D20600B079E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6253EFD2189C04700225EE6 /* MYMatchingEmojiManager.swift */,
+				C6253EFB2189C00B00225EE6 /* MYKeyboardBundle.bundle */,
 				30DE6C78218441B300D543BB /* Media.xcassets */,
-				C6515CF12159D36B00B079E5 /* MYKeyboard.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -342,9 +375,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6515CF22159D36B00B079E5 /* MYKeyboard.bundle in Resources */,
 				C63D7D79214B4DC500713BDC /* LaunchScreen.storyboard in Resources */,
 				C663160A218174CF001D98F5 /* loading.gif in Resources */,
+				C6253EFC2189C00B00225EE6 /* MYKeyboardBundle.bundle in Resources */,
 				C63D7D76214B4DC500713BDC /* Assets.xcassets in Resources */,
 				30DE6C79218441B300D543BB /* Media.xcassets in Resources */,
 				C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */,
@@ -415,6 +448,7 @@
 				C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */,
 				C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */,
 				C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */,
+				C6253F002189C6D100225EE6 /* MYEmojiPageScrollView.swift in Sources */,
 				C63F0E342150E62D00BC8B0E /* MYRequestApi.swift in Sources */,
 				C63D7D87215091D100713BDC /* TestModel.swift in Sources */,
 				C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */,
@@ -424,6 +458,7 @@
 				C66316642186B5C9001D98F5 /* MYRecordHandled.swift in Sources */,
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
 				C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */,
+				C6253EF92189BFAA00225EE6 /* MYEmojiPackageModel.swift in Sources */,
 				C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */,
 				C663165F2186A5B9001D98F5 /* MYConverAudioFile.m in Sources */,
 				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
@@ -433,6 +468,7 @@
 				30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */,
 				C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
+				C6253EFE2189C04700225EE6 /* MYMatchingEmojiManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

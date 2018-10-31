@@ -83,3 +83,10 @@ func MYColorForRGB(_ r:Int,_ g: Int,_ b:Int) ->  UIColor{
     return UIColor.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1.0)
 }
 
+func safeAreaBottom() ->  CGFloat {
+    var bottomInset : CGFloat = 0.0
+    if #available(iOS 11.0, *) {
+        bottomInset = (UIApplication.shared.delegate?.window??.safeAreaInsets.bottom)!
+    }
+    return bottomInset
+}
