@@ -41,7 +41,7 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
     override func layoutSubviews() {
         self.line.frame = .init(x: 0, y: 0, width: width, height: 0.5)
         self.emojiScrollView.frame = .init(x: 0, y: MYStickerTopSpace, width: width, height: MYStickerScrollerHeight)
-        self.pageControl.frame = .init(x: 0, y: self.emojiScrollView.bottom + MYStickerControlPageTopBottomSpace, width: width, height: MYStickerControlPageHeight)
+        
         let viewHeight = MYStickerSenderBtnHeight + safeAreaBottom()
         self.bottomView.frame = .init(x: 0, y: self.height - viewHeight, width: width, height: viewHeight)
         self.sendButton.frame = .init(x: width - MYStickerSenderBtnWidth, y: 0, width: MYStickerSenderBtnWidth, height: MYStickerSenderBtnHeight)
@@ -51,23 +51,24 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
     
     func didClickEmoji(with model: MYEmojiModel) {
         self.delegate?.didClickEmoji(with: model)
-        print("\(model.imageName!)")
+        
     }
     
     func didClickDelete() {
         self.delegate?.didClickDelete()
-        print("点击删除")
+        
     }
     
     func scroll(with start: Int, end: Int,progress: CGFloat){
-        print("开始 \(start)  结束 \(end)  进度\(progress)")
+        
+        self.pageControl.scroll(start: start, end: end, progress: progress)
     }
     
     // MARK: - 响应方法
     
     @objc private func sendEvent(){
         self.delegate?.didSendButton()
-        print("点击发送")
+         
     }
     
     
@@ -98,7 +99,9 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         }
         let totle = totlePage(with: emojis.count)
         var emojiPages = Array<MYEmojiPageView>()
-        
+        self.pageControl.totlePage(totle)
+        self.pageControl.center = self.center
+        self.pageControl.y = self.emojiScrollView.bottom + MYStickerControlPageTopBottomSpace
         for index in 0..<totle {
              
             //根据下标挑选对应页的数据
@@ -136,13 +139,8 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         return view
     }()
     
-    private lazy var pageControl : UIPageControl = {
-        
-        let control = UIPageControl(frame: .init(x: 0, y: self.emojiScrollView.bottom + MYStickerControlPageTopBottomSpace, width: width, height: MYStickerControlPageHeight))
-        control.hidesForSinglePage = true
-        control.currentPageIndicatorTintColor = MYColorForRGB(245, 166, 35)
-        control.pageIndicatorTintColor = MYColorForRGB(188, 188, 188)
-        control.defersCurrentPageDisplay = true
+    private lazy var pageControl : MYPageControlView = {
+        let control = MYPageControlView()
         return control
     }()
     

@@ -10,7 +10,8 @@ import UIKit
 
 
 
-class MYKeyboardInputView: UIView,UITextViewDelegate{
+class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate{
+    
     /// 初始化 frame
     var initFrame : CGRect = .zero
     /// 获取键盘默认宽高
@@ -76,7 +77,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     // MARK: - 公开方法
     
     // 清除文本
-    func clearText()  {
+    public func clearText()  {
         self.textView.text = nil
         self.textView.font = UIFont.systemFont(ofSize: MYTextViewTextFont)
         // 收回键盘
@@ -88,7 +89,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     // MARK: - 计算高度,frame
     
     /// 通过最大行和最小行计算textView 高度
-    func heightWithFit() -> CGFloat {
+    public func heightWithFit() -> CGFloat {
         let textViewHeight = textView.layoutManager.usedRect(for: textView.textContainer).size.height + MYTextViewTextDefineHeight
 
         let minHeight = heightWithLine(MYEmojiTextMinLine)
@@ -282,6 +283,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         let animate = {
             self.frame = frame
             self.calculateWidgetFrame()
+            if self.keyboardType == .Emoji || self.keyboardType == .Funcs{
+                self.emojiView.frame = .init(x: 0, y: self.heightWithFit(), width: self.width, height: self.emojiViewMaxHeight)
+                self.funcsView.frame = .init(x: 0, y: self.heightWithFit(), width: self.width, height: self.emojiViewMaxHeight)
+            }
         }
         
         UIView.animate(withDuration: MYDuration, animations: animate)
@@ -446,6 +451,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     
         let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
         view.isHidden = true
+        view.delegate = self
         return view
     }()
     
@@ -468,5 +474,77 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+extension MYKeyboardInputView {
+    
+    func didSendButton() {
+        
+    }
+    
+    func didClickEmoji(with model: MYEmojiModel) {
+        
+        guard let image = UIImage.image(name: model.imageName!, path: "emoji") else {
+            print("图片找不到")
+            return
+        }
+        // textView光标位置
+        let selectedRange = self.textView.selectedRange
+        // 将 emoji 标记为[name] 这种形式
+        let emojiString = "[\(model.emojiDescription!)]"
+        // 通过字体大小设置 emoji 大小
+        let font = UIFont.systemFont(ofSize: MYTextViewTextFont)
+        let emojiHeight = font.lineHeight
+        // emoji 图片附件
+        let attachment = NSTextAttachment()
+        attachment.image = image
+        attachment.bounds = .init(x: 0, y: font.descender, width: emojiHeight, height: emojiHeight)
+        let attachString = NSAttributedString(attachment: attachment)
+        // 将图片附件转为 NSMutableAttributedString
+        let emojiAttributedString = NSMutableAttributedString(attributedString: attachString)
+        // 将这段文字打上标记,方便遍历
+        emojiAttributedString.addAttribute(NSAttributedString.Key(rawValue: MYAddEmojiTag), value: emojiString, range: .init(location: 0, length: attachString.length))
+        // 获取输入框中的富文本
+        let attributedText = NSMutableAttributedString(attributedString: self.textView.attributedText)
+        // 将打好标记的富文本替换到光标位置
+        attributedText.replaceCharacters(in: selectedRange, with: emojiAttributedString)
+        self.textView.attributedText = attributedText
+        self.textView.selectedRange = .init(location: selectedRange.location + emojiAttributedString.length, length: 0)
+        // 重新计算输入框大小
+        self.textViewDidChange(self.textView)
+    
+        
+    }
+    
+    func didClickDelete() {
+        let selectedRange = self.textView.selectedRange
+        if selectedRange.location == 0 && selectedRange.length == 0 {
+            return
+        }
+        let attributedText = NSMutableAttributedString(attributedString: self.textView.attributedText)
+        if selectedRange.length > 0 {
+            //删除字符
+            attributedText.deleteCharacters(in: selectedRange)
+            self.textView.attributedText = attributedText
+            self.textView.selectedRange = .init(location: selectedRange.location, length: 0)
+        }else{
+            //删除表情
+            attributedText.deleteCharacters(in: .init(location: selectedRange.location - 1, length:  1))
+            self.textView.attributedText = attributedText
+            self.textView.selectedRange = .init(location: selectedRange.location - 1, length: 0)
+        }
+        self.textViewDidChange(self.textView)
+    }
+    
+    public func plainText() -> String{
+        guard let reuslt = MYMatchingEmojiManager.share.exchangePlainText(self.textView.attributedText) else {
+            return ""
+        }
+        return reuslt
+    }
+    
+    public func attributeText() -> NSAttributedString {
+        return self.textView.attributedText
+    }
 }
 
