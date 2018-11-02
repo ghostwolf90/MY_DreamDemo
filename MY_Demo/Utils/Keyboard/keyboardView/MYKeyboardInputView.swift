@@ -445,14 +445,13 @@ class MYKeyboardInputView: UIView,UITextViewDelegate{
     private lazy var emojiView : MYEmojiKeyboardView = {
     
         let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
-        view.backgroundColor = .red
         view.isHidden = true
         return view
     }()
     
-    private lazy var funcsView : MYEmojiKeyboardView = {
+    private lazy var funcsView : UIView = {
         
-        let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
+        let view = UIView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
         view.backgroundColor = UIColor.green
         view.isHidden = true
         

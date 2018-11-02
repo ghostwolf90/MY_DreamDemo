@@ -51,12 +51,12 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         if cachePath == nil {
             self.cachePath = cachePath
         }
-        createRecord ()
+        
     }
     
     override init() {
         super.init()
-        createRecord ()
+        
     }
     
     //MARK: 公开方法
@@ -65,6 +65,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     public func record() {
         //判断是否有声音播放
         if !self.isRecording {
+            recordSessionModel()
             self.isRecording = true
             //创建一个录音机,并开始录音
             if self.audioRecorder == nil {
@@ -204,7 +205,6 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     /// 改变 session 模式,创建录音机开始录音
     private func  createRecord () {
         
-        recordSessionModel()
         do {
             self.audioRecorder = try AVAudioRecorder.init(url: setUpSavePath(), settings: getAudioSeting())
             self.audioRecorder?.delegate = self

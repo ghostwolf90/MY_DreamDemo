@@ -11,7 +11,7 @@ import UIKit
 public extension UIImage {
     class func image(name: String, path: String) -> UIImage?{
         let bundle = Bundle.init(for:MYKeyboardInputView.self)
-        let url = bundle.url(forResource: "MYKeyboard", withExtension: "bundle")
+        let url = bundle.url(forResource: "MYKeyboardBundle", withExtension: "bundle")
         if url == nil {
             return nil
         }

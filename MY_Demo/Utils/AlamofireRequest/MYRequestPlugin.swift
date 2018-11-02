@@ -57,7 +57,7 @@ public final class MYRequestLoadingPlugin: PluginType {
     
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         print("结束请求")
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global().async { //[weak self] in
             
 //            if (self?.custom.isSave)! {
 //                switch result {

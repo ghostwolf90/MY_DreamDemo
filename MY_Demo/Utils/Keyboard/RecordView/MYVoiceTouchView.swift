@@ -11,8 +11,8 @@ import AVFoundation
 
 protocol MYVoiceTouchViewDelegate : NSObjectProtocol {
     
-    /// 准备初始化录音机
-    func initRecord()
+//    /// 准备初始化录音机
+//    func initRecord()
     /// 开始录音
     func touchBegan()
     /// 录音结束
@@ -71,10 +71,10 @@ class MYVoiceTouchView: UIView {
             let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
             if authStatus == .notDetermined {
                 //初始化录音机
-                AVCaptureDevice.requestAccess(for: .audio) {[weak self] (granted) in
+                AVCaptureDevice.requestAccess(for: .audio) {(granted) in
                     if granted {
                         print("点击允许访问麦克风")
-                        self?.delegate?.initRecord()
+//                        self?.delegate?.initRecord()
                     }else{
                         print("点击拒绝访问麦克风")
                     }

@@ -41,6 +41,7 @@
 		C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316652186E4A7001D98F5 /* MYVoiceTouchTipView.swift */; };
 		C66316692186F728001D98F5 /* MYEasyAduioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316682186F728001D98F5 /* MYEasyAduioPlayer.swift */; };
 		C6724720218AA20C007E6E9F /* MYEmojiPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672471F218AA20C007E6E9F /* MYEmojiPageView.swift */; };
+		C6724742218BF60A007E6E9F /* MYEmojiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6724741218BF60A007E6E9F /* MYEmojiProtocol.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		C66316652186E4A7001D98F5 /* MYVoiceTouchTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYVoiceTouchTipView.swift; sourceTree = "<group>"; };
 		C66316682186F728001D98F5 /* MYEasyAduioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEasyAduioPlayer.swift; sourceTree = "<group>"; };
 		C672471F218AA20C007E6E9F /* MYEmojiPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiPageView.swift; sourceTree = "<group>"; };
+		C6724741218BF60A007E6E9F /* MYEmojiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiProtocol.swift; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 				C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */,
 				C6253EFF2189C6D100225EE6 /* MYEmojiPageScrollView.swift */,
 				C672471F218AA20C007E6E9F /* MYEmojiPageView.swift */,
+				C6724741218BF60A007E6E9F /* MYEmojiProtocol.swift */,
 			);
 			path = Subview;
 			sourceTree = "<group>";
@@ -346,7 +349,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = magic;
 				TargetAttributes = {
 					C63D7D6A214B4DC300713BDC = {
@@ -472,6 +475,7 @@
 				30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */,
 				C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
+				C6724742218BF60A007E6E9F /* MYEmojiProtocol.swift in Sources */,
 				C6253EFE2189C04700225EE6 /* MYMatchingEmojiManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,7 +620,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 59ABE1D9540DA64FBADDE1E2 /* Pods-MY_Demo.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -650,7 +653,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B386F20748E62FB0141D9B3 /* Pods-MY_Demo.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

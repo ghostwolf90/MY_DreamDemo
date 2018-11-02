@@ -17,9 +17,9 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     
     // MARK: - touchView 代理
     
-    func initRecord() {
-        self.audioRecord = createRecorder()
-    }
+//    func initRecord() {
+//        self.audioRecord = createRecorder()
+//    }
     
     func touchBegan() {
         print("开始录音")

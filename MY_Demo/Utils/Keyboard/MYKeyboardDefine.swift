@@ -49,15 +49,15 @@ let MYStickerScrollerHeight : CGFloat = 132.0//滚动高度
 let MYStickerControlPageTopBottomSpace : CGFloat = 10.0//pageControl 间距
 let MYStickerControlPageHeight : CGFloat = 7.0//pageControl 高度
 let MYStickerSenderBtnWidth : CGFloat = 55.0//发送按钮宽
-let MYStickerSenderBtnHeight : CGFloat = 30.0//发送按钮高
+let MYStickerSenderBtnHeight : CGFloat = 40.0//发送按钮高
 //表情行数
-let MYEmojiPageMaxRow : CGFloat = 3//最多几行
-var MYEmojiPageMaxColumn : CGFloat {
+let MYEmojiPageMaxRow : Int = 3//最多几行
+var MYEmojiPageMaxColumn : Int {
     get{
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return 8.0
+            return 8
         }
-        return 7.0
+        return 7
     }
 }
 //表情页面

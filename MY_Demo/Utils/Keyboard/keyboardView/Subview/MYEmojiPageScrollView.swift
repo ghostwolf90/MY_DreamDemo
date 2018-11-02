@@ -8,8 +8,13 @@
 
 import UIKit
 
-class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate {
+protocol MYEmojiPageScrollViewDelegate : MYEmojiProtocolDelegate {
+    func scroll(with start: Int, end: Int,progress: CGFloat)
+}
+
+class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,MYEmojiProtocolDelegate {
     
+    weak var scrollDelegate : MYEmojiPageScrollViewDelegate?
     /// 自定义 flowlayout
     private var flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     /// ID
@@ -28,6 +33,7 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
         addInit()
         
     }
+    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         flowLayout.itemSize = frame.size
         flowLayout.minimumLineSpacing = 0
@@ -38,6 +44,10 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
         addInit()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.flowLayout.itemSize = self.bounds.size
+    }
     // MARK: - 公开方法
     
     public var data : Array<MYEmojiPageView>  {
@@ -47,9 +57,20 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
         }
     }
     
+    // MARK: - 代理方法
+    
+    func didClickEmoji(with model:MYEmojiModel){
+        self.scrollDelegate?.didClickEmoji(with: model)
+    }
+    
+    func didClickDelete(){
+        self.scrollDelegate?.didClickDelete()
+    }
+    
     // MARK: - 私有方法
     
     private func addInit() {
+        backgroundColor = .clear
         showsHorizontalScrollIndicator = false
         bounces = false
         isPagingEnabled = true
@@ -77,6 +98,7 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
             view.removeFromSuperview()
         }
         let child = data[indexPath.row]
+        child.pageDelegate = self
         child.frame = cell.contentView.bounds
         cell.contentView.addSubview(child)
     }
@@ -118,8 +140,8 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
                 endIndex = startIndex - 1
                 endIndex = endIndex < 0 ? 0 : endIndex
             }
+            self.scrollDelegate?.scroll(with: startIndex, end: endIndex, progress: progress)
             
-            print("开始 \(startIndex)  结束 \(endIndex)  进度\(progress)")
             
         }
     }
@@ -129,8 +151,8 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
         let currentOffsetX = scrollView.contentOffset.x
         let startIndex = Int(startOffsetX/scrollView_W)
         let endIndex = Int((currentOffsetX/scrollView_W))
-        
-        print("\(startIndex) --->  \(endIndex)")
+        self.scrollDelegate?.scroll(with: startIndex, end: endIndex,progress: 1.0)
+         
         
     }
     
