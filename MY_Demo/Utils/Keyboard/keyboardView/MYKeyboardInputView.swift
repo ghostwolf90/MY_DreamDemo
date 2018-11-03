@@ -2,7 +2,7 @@
 //  MYKeyboardInputView.swift
 //  MYTool
 //
-//  Created by 马慧莹 on 2018/8/16.
+//  Created by magic on 2018/8/16.
 //  Copyright © 2018年 MY. All rights reserved.
 //
 
@@ -21,6 +21,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     /// 获取键盘是否展示状态
     private(set) var isShowKeyboard : Bool = false
     
+    private var emojiPreviewView = MYEmojiPreviewView()
+    
     ///初始化
     init() {
         super.init(frame: .zero)
@@ -35,12 +37,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     /// 初始化控件,增加通知
     private func addInit(){
-        self.layer.masksToBounds = true
+//        self.layer.masksToBounds = true
         ///设置为YES的话可以阻止同一个window中其他控件与他响应
         isExclusiveTouch = true
         backgroundColor = MYColorForRGB(244, 244, 244)
-        layer.borderWidth = 0.5
-        layer.borderColor = MYColorForRGB(211, 211, 211).cgColor
+//        layer.borderWidth = 0.5
+//        layer.borderColor = MYColorForRGB(211, 211, 211).cgColor
         //默认宽高
         width = UIScreen.main.bounds.width
         height = heightWithFit()
@@ -54,6 +56,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         //增加监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPreview(_:)), name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil)
     }
     
     /// 重写layout frame 改变后重新布局
@@ -158,6 +161,25 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         }
     }
     
+    // MARK: - 预览界面通知
+    
+    @objc func showPreview(_ notification: Notification){
+        let tag = notification.userInfo?["tag"] as! String
+        if tag == "1" {
+            let model = notification.userInfo?["model"] as! MYEmojiModel
+            let frame = notification.userInfo?["frame"] as! CGRect
+            let cacluateX = frame.origin.x - MYEmojiPreviewWidth/2 + frame.size.width/2
+            let cacluateY = heightWithFit() + MYStickerTopSpace + frame.size.height - MYEmojiPreviewHeight
+            
+            let frames = CGRect.init(origin: .init(x: cacluateX, y: cacluateY), size: .init(width: MYEmojiPreviewWidth, height: MYEmojiPreviewHeight))
+            emojiPreviewView.frame = frames
+            emojiPreviewView.preview(with: model)
+            addSubview(emojiPreviewView)
+        }else{
+            emojiPreviewView.removeFromSuperview()
+        }
+        
+    }
     
     // MARK: - 键盘通知 WillShow;WillHide
     
@@ -511,6 +533,7 @@ extension MYKeyboardInputView {
         self.textView.attributedText = attributedText
         self.textView.selectedRange = .init(location: selectedRange.location + emojiAttributedString.length, length: 0)
         // 重新计算输入框大小
+        self.textView.font = font
         self.textViewDidChange(self.textView)
     
         
@@ -533,6 +556,7 @@ extension MYKeyboardInputView {
             self.textView.attributedText = attributedText
             self.textView.selectedRange = .init(location: selectedRange.location - 1, length: 0)
         }
+        self.textView.font = UIFont.systemFont(ofSize: MYTextViewTextFont)
         self.textViewDidChange(self.textView)
     }
     

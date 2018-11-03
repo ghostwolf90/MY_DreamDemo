@@ -2,7 +2,7 @@
 //  MYKeyboardImageExtension.swift
 //  MYTool
 //
-//  Created by 马慧莹 on 2018/8/20.
+//  Created by magic on 2018/8/20.
 //  Copyright © 2018年 MY. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  MYMatchingEmojiManager.swift
 //  MYTool
 //
-//  Created by 马慧莹 on 2018/8/23.
+//  Created by magic on 2018/8/23.
 //  Copyright © 2018年 MY. All rights reserved.
 //
 
@@ -97,20 +97,22 @@ class MYMatchingEmojiManager: NSObject {
         if matchingResults != nil {
             var offset = 0 //每替换一个将要缩进或者增加一段距离
             for result in matchingResults! {
+                // 创建一个 emoji 的富文本,替换原来的标记文本
+                let emojiAttribute = NSMutableAttributedString()
                 if result.isHaveImage {
                     let emojiHeight = font.lineHeight
                     let attachment = NSTextAttachment()
                     attachment.image = result.emojiImage!
                     attachment.bounds = .init(x: 0, y: font.descender, width: emojiHeight, height: emojiHeight)
-                    emojiAttributedString.setAttributedString(NSAttributedString(attachment: attachment))
-                    emojiAttributedString.addAttribute(NSAttributedString.Key(rawValue: MYAddEmojiTag), value: result.showingDescription!, range: .init(location: 0, length: emojiAttributedString.length))
+                    emojiAttribute.setAttributedString(NSAttributedString(attachment: attachment))
+                    emojiAttribute.addAttribute(NSAttributedString.Key(rawValue: MYAddEmojiTag), value: result.showingDescription!, range: .init(location: 0, length: emojiAttribute.length))
                     
                 }else{
-                    emojiAttributedString.setAttributedString(NSAttributedString(string: result.showingDescription!))
+                    emojiAttribute.setAttributedString(NSAttributedString(string: result.showingDescription!))
                 }
                 let actualRange = NSRange.init(location: result.range!.location - offset, length: result.showingDescription!.count)//替换的range
-                emojiAttributedString.replaceCharacters(in: actualRange, with: emojiAttributedString)
-                offset += result.showingDescription!.count - emojiAttributedString.length
+                emojiAttributedString.replaceCharacters(in: actualRange, with: emojiAttribute)
+                offset += result.showingDescription!.count - emojiAttribute.length
             }
         }
         return emojiAttributedString
@@ -121,7 +123,7 @@ class MYMatchingEmojiManager: NSObject {
             return nil
         }
         //正则匹配,匹配[]中间的内容,如果出现[a[a]]则只匹配出[a]
-        //正则验证网站:https://c.runoob.com/front-end/854  表达式 \[([a-z])+?\]
+        //正则验证网站:https://c.runoob.com/front-end/854  表达式: \[([a-z])+?\]
         let regex = try! NSRegularExpression.init(pattern: "\\[([a-z])+?\\]")
         let results = regex.matches(in: string
             , options: NSRegularExpression.MatchingOptions.reportProgress, range: .init(location: 0, length: string.count))
@@ -132,11 +134,11 @@ class MYMatchingEmojiManager: NSObject {
             for result in results {
                 var showingDescription = tempSrring.substring(with: result.range)//没有去掉[]的
                 showingDescription.remove(at: showingDescription.startIndex)//去掉[
-                showingDescription.remove(at: showingDescription.endIndex)//去掉]
+                showingDescription.removeLast()//去掉]
                 let emojiModel = findEmojiModel(with: showingDescription)
                 let emojiMatchingResult = MYMatchingEmojiResult()
                 emojiMatchingResult.range = result.range
-                emojiMatchingResult.showingDescription = "[\(showingDescription)]"
+                emojiMatchingResult.showingDescription = "[\(showingDescription)]"//将中括号再加上
                 emojiMatchingResult.imageName = showingDescription
                 if emojiModel != nil {
                     // 有那个图片

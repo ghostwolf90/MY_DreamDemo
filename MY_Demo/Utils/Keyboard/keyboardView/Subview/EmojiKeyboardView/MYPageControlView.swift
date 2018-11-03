@@ -2,12 +2,13 @@
 //  MYPageControlView.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/11/2.
+//  Created by magic on 2018/11/2.
 //  Copyright © 2018 magic. All rights reserved.
 //
 
 import UIKit
 
+/// 下标 view
 class MYPageControlView: UIView {
     
     private var views: Array<UIView>?

@@ -2,18 +2,22 @@
 //  MYEmojiPageView.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/11/1.
+//  Created by magic on 2018/11/1.
 //  Copyright © 2018 magic. All rights reserved.
 //
 
 import UIKit
 
+
+
+/// emoji按钮界面
 class MYEmojiPageView: UIView {
 
     weak var pageDelegate : MYEmojiProtocolDelegate?
     private var emojiModelArray : Array<MYEmojiModel> = Array<MYEmojiModel>()
     private var emojiButtons : Array<UIButton> = Array<UIButton>()
     private var deleteEmojiTimer : Timer?
+    private var emojiPreviewView = MYEmojiPreviewView()
     init(frame:CGRect,emojis:Array<MYEmojiModel>) {
         super.init(frame: frame)
         self.emojiModelArray = emojis
@@ -29,7 +33,7 @@ class MYEmojiPageView: UIView {
             let button = UIButton(frame: .init(x: minX, y: minY, width: MYEmojiButtonWH, height: MYEmojiButtonWH))
             addSubview(button)
             button.setImage(UIImage.image(name: model.imageName ?? "", path: "emoji"), for: .normal)
-            button.imageEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+            button.imageEdgeInsets = .init(top: 2, left: 2, bottom: 2, right: 2)
             button.tag = index
             button.addTarget(self, action: #selector(emojiEvent(_:)), for: .touchUpInside)
             let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressEvent(_:)))
@@ -43,29 +47,56 @@ class MYEmojiPageView: UIView {
         let minDeleteY = CGFloat(MYEmojiPageMaxRow - 1) * (MYEmojiButtonWH + MYEmojiButtonVerticalMargin)
         self.deleteButton.frame = .init(x: minDeleteX, y: minDeleteY, width: MYEmojiButtonWH, height: MYEmojiButtonWH)
         self.deleteButton.imageEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+        
     }
     
     
-    @objc func emojiEvent(_ sender: UIButton) {
+    @objc private func emojiEvent(_ sender: UIButton) {
         
         let model = self.emojiModelArray[sender.tag]
         self.pageDelegate?.didClickEmoji(with: model)
     }
     
-    @objc func longPressEvent(_ sender: UILongPressGestureRecognizer) {
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch = ((touches as NSSet).anyObject() as AnyObject)
+//        if touch.view!.isKind(of: UIButton.self) {
+//            let button = touch.view! as! UIButton
+//            print(button.tag)
+//        }
+//    }
+    
+    @objc private func longPressEvent(_ sender: UILongPressGestureRecognizer) {
+        let index = sender.view!.tag
+        let model = self.emojiModelArray[index]
+        let button = self.emojiButtons[index]
         
+        switch sender.state {
+        case .began:
+            let notification = Notification.init(name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil, userInfo: ["model":model,"frame":button.frame,"tag":"1"])
+            NotificationCenter.default.post(notification)
+            break
+        case .ended:
+            let notification = Notification.init(name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil, userInfo: ["model":model,"frame":button.frame,"tag":"0"])
+            NotificationCenter.default.post(notification)
+            emojiEvent(button)
+            break
+            
+        default:
+            emojiPreviewView.removeFromSuperview()
+            break
+        }
     }
     
-    @objc func didTouchDownDeleteButton(_ sender: UIButton) {
+    @objc private func didTouchDownDeleteButton(_ sender: UIButton) {
         invalidateTimer()
         self.deleteEmojiTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(deleEmojiEvent), userInfo: nil, repeats: true)
     }
     
-    @objc func didTouchUpOutsideDeleteButton(_ sender: UIButton) {
+    @objc private func didTouchUpOutsideDeleteButton(_ sender: UIButton) {
         invalidateTimer()
     }
     
-    @objc func didTouchUpInsideDeleteButton(_ sender: UIButton) {
+    @objc private func didTouchUpInsideDeleteButton(_ sender: UIButton) {
         deleEmojiEvent()
         invalidateTimer()
     }
@@ -80,6 +111,19 @@ class MYEmojiPageView: UIView {
     
     @objc private func deleEmojiEvent(){
         self.pageDelegate?.didClickDelete()
+    }
+    
+    // MARK: - 展示预览界面
+    
+    private func showPreview(with model: MYEmojiModel,button: UIButton) {
+        
+        emojiPreviewView.frame = .init(origin: .zero, size: .init(width: MYEmojiPreviewWidth, height: MYEmojiPreviewHeight))
+        emojiPreviewView.center = button.center
+        emojiPreviewView.y = button.height - MYEmojiPreviewHeight
+        emojiPreviewView.preview(with: model)
+        
+        UIApplication.shared.windows.last!.addSubview(emojiPreviewView)
+        
     }
     
     private lazy var deleteButton : UIButton = {

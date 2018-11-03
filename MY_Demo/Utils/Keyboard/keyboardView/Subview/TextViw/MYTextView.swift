@@ -2,7 +2,7 @@
 //  MYTextView.swift
 //  MYTool
 //
-//  Created by 马慧莹 on 2018/8/17.
+//  Created by magic on 2018/8/17.
 //  Copyright © 2018年 MY. All rights reserved.
 //
 
@@ -60,6 +60,46 @@ class MYTextView: UITextView {
         didSet {
             showPlaceholder()
         }
+    }
+    
+    // MARK: - 剪切,复制,拷贝功能
+    
+    override func cut(_ sender: Any?) {
+        let sting = MYMatchingEmojiManager.share.exchangePlainText(self.attributedText)
+        if sting != nil {
+            UIPasteboard.general.string = sting
+            let selectedRange = self.selectedRange
+            let attributeContent = NSMutableAttributedString(attributedString: self.attributedText)
+            attributeContent.replaceCharacters(in: self.selectedRange, with: "")
+            attributeContent.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: MYTextViewTextFont), range: .init(location: 0, length: attributeContent.length))
+            self.attributedText = attributeContent
+            self.selectedRange = .init(location: selectedRange.location, length: 0)
+            self.delegate?.textViewDidChange!(self)
+            
+        }
+    }
+    
+    override func copy(_ sender: Any?) {
+        let sting = MYMatchingEmojiManager.share.exchangePlainText(self.attributedText)
+        if sting != nil {
+            UIPasteboard.general.string = sting
+        }
+    }
+    
+    override func paste(_ sender: Any?) {
+        let stringP = UIPasteboard.general.string
+        guard let string = stringP else {
+            return
+        }
+        let attributedPasteString = MYMatchingEmojiManager.share.exchangeAttribute(string)
+        let selectedRange = self.selectedRange
+        let attributeContent = NSMutableAttributedString(attributedString: self.attributedText)
+        attributeContent.insert(attributedPasteString, at: self.selectedRange.location)
+        attributeContent.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: MYTextViewTextFont), range: .init(location: 0, length: attributeContent.length))
+        
+        self.attributedText = attributeContent
+        self.selectedRange = .init(location: selectedRange.location + attributedPasteString.length, length: 0)
+        self.delegate?.textViewDidChange!(self)
     }
     
     // MARK: - 判断placeholder是否显示

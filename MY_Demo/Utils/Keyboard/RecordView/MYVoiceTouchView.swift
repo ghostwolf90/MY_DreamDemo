@@ -2,7 +2,7 @@
 //  MYVoiceTouchView.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/10/26.
+//  Created by magic on 2018/10/26.
 //  Copyright © 2018 magic. All rights reserved.
 //
 

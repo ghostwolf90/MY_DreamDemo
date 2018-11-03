@@ -2,7 +2,7 @@
 //  MYResultModel.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/9/20.
+//  Created by magic on 2018/9/20.
 //  Copyright © 2018年 magic. All rights reserved.
 //
 

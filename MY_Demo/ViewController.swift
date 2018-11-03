@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/9/14.
+//  Created by magic on 2018/9/14.
 //  Copyright © 2018年 magic. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     self.view.backgroundColor = .white
+     self.view.backgroundColor = UIColor.lightGray
 //        let parm = ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"]
 //        var custom = MYCustomRequest()
 //        custom.isSave = true

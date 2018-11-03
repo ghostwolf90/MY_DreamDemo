@@ -2,7 +2,7 @@
 //  MYKeyboardDefine.swift
 //  MYTool
 //
-//  Created by 马慧莹 on 2018/8/17.
+//  Created by magic on 2018/8/17.
 //  Copyright © 2018年 MY. All rights reserved.
 //
 
@@ -23,11 +23,7 @@ enum MYKeyboardInputViewEnum {
         case Right
         case Boths
     }
-    enum EmojiScrollDirection {
-        case Left
-        case Mid
-        case Right
-    }
+    
 }
 let MYSCREEN_WIDTH = UIScreen.main.bounds.width
 let MYSCREEN_HEIGHT = UIScreen.main.bounds.height
@@ -65,6 +61,8 @@ let MYEmojiButtonWH : CGFloat = 32.0//一个 emoji button 的大小
 let MYEmojiButtonVerticalMargin : CGFloat = 16.0//上下间距
 //富文本表情,标记
 let MYAddEmojiTag : String = "MYEmojiTextGeneralTag"
+let MYPreviewNotificationName = "MYPreviewNotificationName"
+
 //预览页面
 let MYEmojiPreviewTopSpace : CGFloat = 15.0//距离顶部间距
 let MYEmojiPreviewImageWH : CGFloat = 30.0//图片宽高

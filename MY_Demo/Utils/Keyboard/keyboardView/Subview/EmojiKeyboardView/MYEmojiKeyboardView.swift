@@ -2,7 +2,7 @@
 //  MYEmojiKeyboardView.swift
 //  MY_Demo
 //
-//  Created by 马慧莹 on 2018/9/26.
+//  Created by magic on 2018/9/26.
 //  Copyright © 2018年 magic. All rights reserved.
 //
 
@@ -34,6 +34,7 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         addSubview(self.pageControl)
         addSubview(self.bottomView)
         self.bottomView.addSubview(self.sendButton)
+        self.bottomView.addSubview(self.indictorPackView)
         selectEmojiPack(with: 0)
         
     }
@@ -86,8 +87,7 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         if index >= self.emojiPacks.count || index < 0 {
             return
         }
-        var packModel = self.emojiPacks[index]
-        packModel.isSelect = true
+        let packModel = self.emojiPacks[index]
         createEmojiPage(packModel)
     }
     
@@ -159,6 +159,14 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         let viewHeight = MYStickerSenderBtnHeight + safeAreaBottom()
         let view = UIView(frame: .init(x: 0, y: self.height - viewHeight, width: width, height: viewHeight))
         view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var indictorPackView : MYEmojiIndictorPackView = {
+        let flaowLayout = UICollectionViewFlowLayout()
+        flaowLayout.scrollDirection = .horizontal
+        flaowLayout.itemSize = .init(width: MYStickerSenderBtnHeight, height: MYStickerSenderBtnHeight)
+        let view = MYEmojiIndictorPackView(frame: .init(x: 0, y: 0, width: width - MYStickerSenderBtnWidth, height: MYStickerSenderBtnHeight), collectionViewLayout: flaowLayout)
         return view
     }()
     
