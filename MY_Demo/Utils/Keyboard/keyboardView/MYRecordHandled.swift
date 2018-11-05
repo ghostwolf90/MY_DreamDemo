@@ -8,11 +8,14 @@
 
 import UIKit
 
-
+protocol MYRecordOutputDelegate : NSObjectProtocol {
+    func recordFileSuccess(path: String, time: NSInteger, name: String)
+    func recordFileFaile(name: String)
+}
 
 class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate{
     
-    
+    weak var delegate : MYRecordOutputDelegate?
     private var audioRecord : MYAudioRecorder?
     
     // MARK: - touchView 代理
@@ -70,11 +73,11 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     }
     
     func recordFileSuccess(path: String, time: NSInteger, name: String) {
-        print("\(path)  \(time)   \(name)")
+        self.delegate?.recordFileSuccess(path: path, time: time, name: name)
     }
     
     func recordFileFaile(name: String) {
-        print(name)
+        self.delegate?.recordFileFaile(name: name)
     }
     
     // MARK: - 创建录音机

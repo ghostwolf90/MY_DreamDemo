@@ -11,7 +11,9 @@ import Kingfisher
 import MYEasyHUDSDK
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,MYKeyboardInputViewDelegate {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,29 +36,28 @@ class ViewController: UIViewController {
         let inputView = MYKeyboardInputView()
         let height = inputView.heightWithFit()
         
- 
         inputView.frame = CGRect.init(x: 0, y: MYSCREEN_HEIGHT  - MYSafeAreaHeight - height, width: UIScreen.main.bounds.width, height: height)
+        inputView.delegate = self
         inputView.initFrame = inputView.frame
-        
-         
         
         self.view.addSubview(inputView)
         
-//
-//        let imageView = UIImageView(frame: .init(x: 50, y: 50, width: 100, height: 100));
-//        imageView.backgroundColor = .red
-//        self.view.addSubview(imageView)
-//        let path = Bundle.main.path(forResource: "loading", ofType: "gif")
-//        let imageResource = ImageResource.init(downloadURL: URL.init(fileURLWithPath: path!))
-//        imageView.kf.setImage(with: imageResource)
-        
-        
-        
+       
     }
     
     
     
+    func keyboardOutPutAttribute(_ attribute: NSAttributedString) {
+        print(attribute)
+    }
     
+    func recordFileSuccess(path: String, time: NSInteger, name: String) {
+        print(time)
+    }
+    
+    func recordFileFaile(name: String) {
+        print(name)
+    }
     
     
     

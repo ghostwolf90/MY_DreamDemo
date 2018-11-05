@@ -8,18 +8,22 @@
 
 import UIKit
 
+protocol MYKeyboardInputViewDelegate : NSObjectProtocol {
+    func keyboardOutPutAttribute(_ attribute:NSAttributedString)
+    func recordFileSuccess(path: String, time: NSInteger, name: String)
+    func recordFileFaile(name: String)
+}
 
-
-class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate{
-    
-    /// 初始化 frame
-    var initFrame : CGRect = .zero
+class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate,MYRecordOutputDelegate{
     /// 获取键盘默认宽高
     var defineHeight : CGFloat {
         return heightWithFit()
     }
     /// 获取键盘是否展示状态
     private(set) var isShowKeyboard : Bool = false
+    weak var delegate : MYKeyboardInputViewDelegate?
+    /// 初始化 frame
+    var initFrame : CGRect = .zero
     /// 表情预览页
     private var emojiPreviewView = MYEmojiPreviewView()
     
@@ -90,7 +94,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     public func resignKeyboard() {
         //改变 keyboard 状态
         if self.textView.isFirstResponder {
-            setNeedsLayout()
+            
             textView.resignFirstResponder()
         }else{
             if self.keyboardType == .Emoji || self.keyboardType == .Funcs {
@@ -276,7 +280,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            print(textView.text)
+            self.delegate?.keyboardOutPutAttribute(textView.attributedText)
+            clearText()
             resignKeyboard()
             return false
         }
@@ -515,6 +520,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     private lazy var recordHandle : MYRecordHandled = {
         let handle = MYRecordHandled()
+        handle.delegate = self
         return handle
     }()
    
@@ -528,7 +534,9 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
 extension MYKeyboardInputView {
     
     func didSendButton() {
-        
+        self.delegate?.keyboardOutPutAttribute(textView.attributedText)
+        clearText()
+        resignKeyboard()
     }
     
     func didClickEmoji(with model: MYEmojiModel) {
@@ -598,6 +606,14 @@ extension MYKeyboardInputView {
     /// 获取 textView富文本
     public func attributeText() -> NSAttributedString {
         return self.textView.attributedText
+    }
+    
+    func recordFileSuccess(path: String, time: NSInteger, name: String) {
+        self.delegate?.recordFileSuccess(path: path, time: time, name: name)
+    }
+    
+    func recordFileFaile(name: String) {
+        self.delegate?.recordFileFaile(name: name)
     }
 }
 
