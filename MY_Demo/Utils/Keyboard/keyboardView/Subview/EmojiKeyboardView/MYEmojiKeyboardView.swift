@@ -18,7 +18,7 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
     /// 顶部分割线
     private var line : UIView = UIView()
     /// 总数据
-    private let emojiPacks = MYMatchingEmojiManager.share.allEmojiPackages
+    private let emojiPacks = MYMatchingEmojiManager.share.allEmojiPack
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -167,6 +167,9 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         flaowLayout.scrollDirection = .horizontal
         flaowLayout.itemSize = .init(width: MYStickerSenderBtnHeight, height: MYStickerSenderBtnHeight)
         let view = MYEmojiIndictorPackView(frame: .init(x: 0, y: 0, width: width - MYStickerSenderBtnWidth, height: MYStickerSenderBtnHeight), collectionViewLayout: flaowLayout)
+        view.selectBlock = {[weak self] (index) in
+            self?.selectEmojiPack(with: index)
+        }
         return view
     }()
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MYEmojiPackageModel{
+class MYEmojiPackageModel: NSObject {
     
     var emojiPackageName : String?
     var emojis : Array<MYEmojiModel>?
@@ -17,7 +17,7 @@ struct MYEmojiPackageModel{
     
 }
 
-struct MYEmojiModel {
+class MYEmojiModel: NSObject {
     
     var imageName : String?
     var emojiDescription : String?

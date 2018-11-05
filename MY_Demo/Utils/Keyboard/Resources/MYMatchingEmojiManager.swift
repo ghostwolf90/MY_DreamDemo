@@ -18,12 +18,7 @@ class MYMatchingEmojiManager: NSObject {
     }
     
     /// 获取全部的表情包
-    var allEmojiPackages : Array<MYEmojiPackageModel>{
-        
-        return self.allEmojiPack
-    }
-    
-    private var allEmojiPack  = Array<MYEmojiPackageModel>()
+    private(set) var allEmojiPack  = Array<MYEmojiPackageModel>()
     
     // MARK: - 获取全部表情包
     
@@ -38,18 +33,18 @@ class MYMatchingEmojiManager: NSObject {
         guard let path = fileBundle?.path(forResource: "KeyboardEmojiInfo", ofType: "plist") else {
             return
         }
-        let array = NSArray.init(contentsOfFile: path)
+        let array = NSMutableArray.init(contentsOfFile: path)
          
         allEmojiPack = (array?.map({ (packInfo) -> MYEmojiPackageModel in
-            let info = packInfo as! Dictionary<String, Any>
-            var packModel = MYEmojiPackageModel()
+            var info = packInfo as! Dictionary<String, Any>
+            let packModel = MYEmojiPackageModel()
             
             packModel.emojiPackageName = info["packagename"] as? String
             
             let emojiArray = info["emoticons"] as! Array<Any>
             packModel.emojis = emojiArray.map({ (packInfo) -> MYEmojiModel in
-                let emojiDict = packInfo as! Dictionary<String, String>
-                var emojiModel = MYEmojiModel()
+                var emojiDict = packInfo as! Dictionary<String, String>
+                let emojiModel = MYEmojiModel()
                 emojiModel.imageName = emojiDict["image"]
                 emojiModel.emojiDescription = emojiDict["desc"]
                 return emojiModel

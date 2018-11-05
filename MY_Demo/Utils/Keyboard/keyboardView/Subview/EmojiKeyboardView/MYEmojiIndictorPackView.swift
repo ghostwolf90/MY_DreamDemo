@@ -8,16 +8,20 @@
 
 import UIKit
 
+typealias SelectPacks = (_ index: NSInteger) -> Void
+
 class MYEmojiIndictorPackView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
+    
+    var  selectBlock : SelectPacks?
     private let cellID = "CollectionCellIdentifier"
     
-    private let data = MYMatchingEmojiManager.share.allEmojiPackages
+    private let data = MYMatchingEmojiManager.share.allEmojiPack
     
-
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     
         super.init(frame: frame, collectionViewLayout: layout)
-        
+        let model = data.first
+        model?.isSelect = true
         backgroundColor = .clear
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -48,6 +52,7 @@ class MYEmojiIndictorPackView: UICollectionView,UICollectionViewDelegate,UIColle
         if model.isSelect {
             button.backgroundColor = MYColorForRGB(244, 244, 244)
         }
+        button.isUserInteractionEnabled = false
         cell.contentView.addSubview(button)
     }
     
@@ -64,7 +69,18 @@ class MYEmojiIndictorPackView: UICollectionView,UICollectionViewDelegate,UIColle
         return 0
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        data.forEach { (model) in
+            model.isSelect = false
+        }
+        let model = data[indexPath.row]
+        if !model.isSelect {
+            model.isSelect = true
+            self.selectBlock?(indexPath.row)
+            collectionView.reloadData()
+        }
+        
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

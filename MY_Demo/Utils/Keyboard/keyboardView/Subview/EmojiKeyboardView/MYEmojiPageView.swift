@@ -46,7 +46,7 @@ class MYEmojiPageView: UIView {
         let minDeleteX = screenWidth - spaceBetweenButtons - MYEmojiButtonWH
         let minDeleteY = CGFloat(MYEmojiPageMaxRow - 1) * (MYEmojiButtonWH + MYEmojiButtonVerticalMargin)
         self.deleteButton.frame = .init(x: minDeleteX, y: minDeleteY, width: MYEmojiButtonWH, height: MYEmojiButtonWH)
-        self.deleteButton.imageEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+        self.deleteButton.imageEdgeInsets = .init(top: 2, left: 2, bottom: 2, right: 2)
         
     }
     
