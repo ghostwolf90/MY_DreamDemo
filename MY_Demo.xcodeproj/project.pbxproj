@@ -115,10 +115,10 @@
 		30DE6C7A2184432000D543BB /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				C6E836C421903F0D00975F39 /* Recorder */,
 				C663166A2186F73C001D98F5 /* AduioPlayer */,
 				30DE6C802185534700D543BB /* ConverAudioFile */,
 				30DE6C7D218552B900D543BB /* Lame */,
-				30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -337,6 +337,14 @@
 				C6A43D10218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift */,
 			);
 			path = EmojiKeyboardView;
+			sourceTree = "<group>";
+		};
+		C6E836C421903F0D00975F39 /* Recorder */ = {
+			isa = PBXGroup;
+			children = (
+				30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */,
+			);
+			path = Recorder;
 			sourceTree = "<group>";
 		};
 		DB64E79ABA7B0C7B15DB43E4 /* Pods */ = {
