@@ -68,8 +68,10 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
     // MARK: - 响应方法
     
     @objc private func sendEvent(){
-        self.delegate?.didSendButton()
-         
+        if self.sendButton.isSelected {
+            self.delegate?.didSendButton()
+            self.sendButton.isSelected = false
+        }
     }
     
     
@@ -144,12 +146,13 @@ class MYEmojiKeyboardView: UIView,MYEmojiPageScrollViewDelegate{
         return control
     }()
     
-    private lazy var sendButton : UIButton = {
+    lazy var sendButton : UIButton = {
         let button = UIButton(frame: .init(x: width - MYStickerSenderBtnWidth, y: 0, width: MYStickerSenderBtnWidth, height: MYStickerSenderBtnHeight))
         button.indicatorType = .Left
         button.indicatorColor = MYColorForRGB(209, 209, 209)
         button.setTitle("发送", for: .normal)
-        button.setTitleColor(MYColorForRGB(62, 131, 229), for: .normal)
+        button.setTitleColor(MYColorForRGB(62, 131, 229), for: .selected)
+        button.setTitleColor(MYColorForRGB(211, 211, 211), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.addTarget(self, action: #selector(sendEvent), for: .touchUpInside)
         return button

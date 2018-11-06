@@ -13,25 +13,28 @@ import MYEasyHUDSDK
 
 class ViewController: UIViewController,MYKeyboardInputViewDelegate {
     
+    var tipLabel = UILabel()
+    var playButton = UIButton()
+    var playUrl = ""
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     self.view.backgroundColor = UIColor.lightGray
-//        let parm = ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"]
-//        var custom = MYCustomRequest()
-//        custom.isSave = true
-////        custom.parameter = parm
-//        let provider = MYNetRequest(custom)
-//        
-//        provider.request(ApiManager.testHome).subscribe(onNext: { (result) in
-//            print(result)
-//        }, onError: { (error) in
-//            print(error)
-//        }, onCompleted: {
-//            print("完成!!")
-//        }).disposed(by: dispose)
+        self.view.backgroundColor = UIColor.lightGray
+        //        let parm = ["courseId":"158","uuId":"4302A11D-8BC4-4618-90EF-4ACCAED84D7C","userId":"2"]
+        //        var custom = MYCustomRequest()
+        //        custom.isSave = true
+        ////        custom.parameter = parm
+        //        let provider = MYNetRequest(custom)
+        //
+        //        provider.request(ApiManager.testHome).subscribe(onNext: { (result) in
+        //            print(result)
+        //        }, onError: { (error) in
+        //            print(error)
+        //        }, onCompleted: {
+        //            print("完成!!")
+        //        }).disposed(by: dispose)
         
         let inputView = MYKeyboardInputView()
         let height = inputView.heightWithFit()
@@ -42,17 +45,30 @@ class ViewController: UIViewController,MYKeyboardInputViewDelegate {
         
         self.view.addSubview(inputView)
         
-       
+        tipLabel.frame = .init(x: 50, y: 80, width: 200, height: 50)
+        tipLabel.backgroundColor = UIColor.lightGray
+        self.view.addSubview(tipLabel)
+        tipLabel.numberOfLines = 0
+        playButton.setTitle("播放语音", for: .normal)
+        self.view.addSubview(playButton)
+        playButton.frame = .init(x: 270, y: 80, width: 80, height: 30)
+        playButton.addTarget(self, action: #selector(playEvent), for: .touchUpInside)
     }
     
-    
+    @objc func playEvent(){
+        MYEasyAduioPlayer.shared.play(with: URL.init(fileURLWithPath: self.playUrl))
+    }
     
     func keyboardOutPutAttribute(_ attribute: NSAttributedString) {
-        print(attribute)
+        let string = MYMatchingEmojiManager.share.exchangePlainText(attribute)
+        print(string!)
+        tipLabel.attributedText = attribute
     }
     
     func recordFileSuccess(path: String, time: NSInteger, name: String) {
-        print(time)
+        
+        self.tipLabel.text = "文件名:\(name),时长:\(time)"
+        self.playUrl = path
     }
     
     func recordFileFaile(name: String) {
@@ -65,7 +81,7 @@ class ViewController: UIViewController,MYKeyboardInputViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 

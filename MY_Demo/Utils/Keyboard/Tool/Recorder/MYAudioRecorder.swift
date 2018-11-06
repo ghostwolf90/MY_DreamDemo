@@ -264,8 +264,6 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         self.fileName = createFileName()
         let cafFileName = "\(self.fileName!).caf"
         let mp3FileName = "\(self.fileName!).mp3"
-        print(cafFileName)
-        print(mp3FileName)
         self.cafPath = rootPath + "/" + cafFileName
         self.mp3Path = rootPath + "/" + mp3FileName
     }

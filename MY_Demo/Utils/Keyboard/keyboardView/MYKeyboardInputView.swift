@@ -289,6 +289,11 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count > 0 {
+            self.emojiView.sendButton.isSelected = true
+        }else{
+            self.emojiView.sendButton.isSelected = false
+        }
         let size = sizeThatFits(self.size)
         let newFrame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height - self.emojiViewMaxHeight, width: size.width, height: size.height + self.emojiViewMaxHeight)
         frameAnimated(newFrame)
@@ -424,15 +429,20 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 
                 break
             case .Record:
+                self.voiceView.isHidden = false
                 self.emojiButton.isSelected = false
                 self.funcButton.isSelected = false
                 if self.textView.isFirstResponder {
                     self.textView.resignFirstResponder()
                 }else{
-                    self.voiceView.isHidden = false
-                    self.frame = self.initFrame;
-                    self.emojiView.isHidden = true
-                    self.funcsView.isHidden = true
+                    if self.isShowKeyboard {
+                        hidenEmojiFuncKeyboard()
+                    }else{
+                        self.frame = self.initFrame;
+                        self.emojiView.isHidden = true
+                        self.funcsView.isHidden = true
+                    }
+                    
                 }
                 break
             default:
@@ -512,7 +522,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     private lazy var funcsView : UIView = {
         
         let view = UIView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
-        view.backgroundColor = UIColor.green
+        let tipLabel = UILabel()
+        tipLabel.frame = .init(x: 20, y: 20, width: 100, height: 20)
+        tipLabel.textAlignment = .center
+        tipLabel.text = "无页面布局"
+        
+        view.addSubview(tipLabel)
         view.isHidden = true
         
         return view

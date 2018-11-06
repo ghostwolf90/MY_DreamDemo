@@ -20,9 +20,9 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     
     // MARK: - touchView 代理
     
-//    func initRecord() {
-//        self.audioRecord = createRecorder()
-//    }
+    //    func initRecord() {
+    //        self.audioRecord = createRecorder()
+    //    }
     
     func touchBegan() {
         print("开始录音")
@@ -73,11 +73,16 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     }
     
     func recordFileSuccess(path: String, time: NSInteger, name: String) {
-        self.delegate?.recordFileSuccess(path: path, time: time, name: name)
+        DispatchQueue.main.async {
+            self.delegate?.recordFileSuccess(path: path, time: time, name: name)
+        }
+        
     }
     
     func recordFileFaile(name: String) {
-        self.delegate?.recordFileFaile(name: name)
+        DispatchQueue.main.async {
+            self.delegate?.recordFileFaile(name: name)
+        }
     }
     
     // MARK: - 创建录音机
@@ -87,7 +92,7 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
         recorder.delegate = self
         return recorder
     }
-
+    
     // MARK: - 懒加载
     
     private lazy var showView : MYVoiceTouchTipView = {
