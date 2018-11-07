@@ -18,7 +18,7 @@ class ViewController: UIViewController,MYKeyboardInputViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
-        let head = UIView(frame: CGRect.init(x: 0, y: 0, width: MYSCREEN_WIDTH, height: MYNavHeight+MYSafeAreaHeight+MYStatusHeight))
+        let head = UIView(frame: CGRect.init(x: 0, y: 0, width: MYSCREEN_WIDTH, height: MYTopHeight))
         head.backgroundColor = MYColorForRGB(50, 51, 54);
         self.view.addSubview(head)
         self.view.backgroundColor = .white
@@ -27,7 +27,7 @@ class ViewController: UIViewController,MYKeyboardInputViewDelegate {
         
         tableView.backgroundColor = MYColorForRGB(239, 243, 246)
         self.view.addSubview(tableView)
-        tableView.frame = CGRect.init(x: 0, y: MYNavHeight+MYSafeAreaHeight+MYStatusHeight, width: MYSCREEN_WIDTH, height: MYSCREEN_HEIGHT - MYNavHeight+MYSafeAreaHeight+MYStatusHeight - height)
+        tableView.frame = CGRect.init(x: 0, y: MYTopHeight, width: MYSCREEN_WIDTH, height: MYSCREEN_HEIGHT - MYTopHeight - height)
         inputView.frame = CGRect.init(x: 0, y: MYSCREEN_HEIGHT - height, width: UIScreen.main.bounds.width, height: height)
         inputView.delegate = self
         inputView.initFrame = inputView.frame
