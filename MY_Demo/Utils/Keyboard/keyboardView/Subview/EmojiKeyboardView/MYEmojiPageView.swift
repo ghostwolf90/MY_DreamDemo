@@ -24,7 +24,7 @@ class MYEmojiPageView: UIView {
         var index : Int = 0
         let screenWidth = frame.width
         let spaceBetweenButtons = (screenWidth - CGFloat(MYEmojiPageMaxColumn) * MYEmojiButtonWH) / (CGFloat(MYEmojiPageMaxColumn) + 1.0)
-        
+        layer.masksToBounds = false
         emojis.forEach { (model) in
             let line = index / MYEmojiPageMaxColumn
             let row = index % MYEmojiPageMaxColumn
@@ -57,13 +57,6 @@ class MYEmojiPageView: UIView {
         self.pageDelegate?.didClickEmoji(with: model)
     }
     
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = ((touches as NSSet).anyObject() as AnyObject)
-//        if touch.view!.isKind(of: UIButton.self) {
-//            let button = touch.view! as! UIButton
-//            print(button.tag)
-//        }
-//    }
     
     @objc private func longPressEvent(_ sender: UILongPressGestureRecognizer) {
         let index = sender.view!.tag
@@ -72,12 +65,14 @@ class MYEmojiPageView: UIView {
         
         switch sender.state {
         case .began:
-            let notification = Notification.init(name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil, userInfo: ["model":model,"frame":button.frame,"tag":"1"])
-            NotificationCenter.default.post(notification)
+
+            showPreview(with: model, button: button)
+            break
+        case .changed:
+            showPreview(with: model, button: button)
             break
         case .ended:
-            let notification = Notification.init(name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil, userInfo: ["model":model,"frame":button.frame,"tag":"0"])
-            NotificationCenter.default.post(notification)
+            emojiPreviewView.removeFromSuperview()
             emojiEvent(button)
             break
             
@@ -118,11 +113,10 @@ class MYEmojiPageView: UIView {
     private func showPreview(with model: MYEmojiModel,button: UIButton) {
         
         emojiPreviewView.frame = .init(origin: .zero, size: .init(width: MYEmojiPreviewWidth, height: MYEmojiPreviewHeight))
-        emojiPreviewView.center = button.center
-        emojiPreviewView.y = button.height - MYEmojiPreviewHeight
+        emojiPreviewView.bottom = button.bottom
+        emojiPreviewView.x = button.left - (MYEmojiPreviewWidth - button.width)/2
         emojiPreviewView.preview(with: model)
-        
-        UIApplication.shared.windows.last!.addSubview(emojiPreviewView)
+        addSubview(emojiPreviewView)
         
     }
     

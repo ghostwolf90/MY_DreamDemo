@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>packagename</key>
-		<string>kaixin</string>
+		<string>xindian</string>
 		<key>emoticons</key>
 		<array>
 			<dict>
@@ -173,7 +173,7 @@
 	</dict>
 	<dict>
 		<key>packagename</key>
-		<string>xindian</string>
+		<string>kaixin</string>
 		<key>emoticons</key>
 		<array>
 			<dict>

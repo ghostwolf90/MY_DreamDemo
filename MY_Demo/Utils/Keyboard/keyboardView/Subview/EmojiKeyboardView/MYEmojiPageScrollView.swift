@@ -23,6 +23,7 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
     /// 位移开始位置
     private var startOffsetX : CGFloat = 0
     private(set) var isMoveing : Bool = false
+    
     init(frame : CGRect) {
         flowLayout.itemSize = frame.size
         flowLayout.minimumLineSpacing = 0
@@ -77,7 +78,9 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
         isPagingEnabled = true
         delegate = self
         dataSource = self
+        layer.masksToBounds = false
         register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        
     }
     
     private func moveFirstPage() {
@@ -156,6 +159,7 @@ class MYEmojiPageScrollView: UICollectionView,UICollectionViewDelegate,UICollect
          
         
     }
+     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

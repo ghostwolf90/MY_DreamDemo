@@ -17,15 +17,15 @@ protocol MYKeyboardInputViewDelegate : NSObjectProtocol {
 class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate,MYRecordOutputDelegate{
     /// 获取键盘默认宽高
     var defineHeight : CGFloat {
-        return heightWithFit()
+        return heightWithFit() + safeAreaBottom()
     }
     /// 获取键盘是否展示状态
     private(set) var isShowKeyboard : Bool = false
     weak var delegate : MYKeyboardInputViewDelegate?
+    private let line = UIView()
     /// 初始化 frame
     var initFrame : CGRect = .zero
-    /// 表情预览页
-    private var emojiPreviewView = MYEmojiPreviewView()
+    
     
     ///初始化
     init() {
@@ -44,20 +44,22 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         ///设置为YES的话可以阻止同一个window中其他控件与他响应
         isExclusiveTouch = true
         backgroundColor = MYColorForRGB(244, 244, 244)
+        line.backgroundColor = MYColorForRGB(211, 211, 211)
         //默认宽高
         width = UIScreen.main.bounds.width
         height = heightWithFit()
-        addSubview(emojiView)
-        addSubview(funcsView)
+        addSubview(line)
         addSubview(textView)
         addSubview(emojiButton)
         addSubview(voiceButton)
         addSubview(funcButton)
         addSubview(voiceView)
+        addSubview(emojiView)
+        addSubview(funcsView)
         //增加监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showPreview(_:)), name: NSNotification.Name(rawValue: MYPreviewNotificationName), object: nil)
+        
     }
     
     /// 重写layout frame 改变后重新布局
@@ -107,7 +109,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     // MARK: - 计算高度,frame
     
     /// 通过最大行和最小行计算textView 高度
-    public func heightWithFit() -> CGFloat {
+    private func heightWithFit() -> CGFloat {
         let textViewHeight = textView.layoutManager.usedRect(for: textView.textContainer).size.height + MYTextViewTextDefineHeight
 
         let minHeight = heightWithLine(MYEmojiTextMinLine)
@@ -130,10 +132,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         let top = MYTextViewTopBottomSpace
         var totleHeight = heightWithFit()
         if self.keyboardType == .Record {
-            totleHeight = self.height
+            totleHeight = self.height - safeAreaBottom()
         }
         let widgetY = totleHeight - MYEmojiBtnWH - MYInputViewWidgetSpace
-        
+        line.frame = .init(x: 0, y: 0, width: self.width, height: 0.5)
         voiceButton.frame = CGRect.init(x: MYInputViewWidgetSpace, y:  widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
         funcButton.frame = CGRect.init(x: self.width - MYInputViewWidgetSpace - MYEmojiBtnWH, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
         emojiButton.frame = CGRect.init(x: funcButton.left - MYEmojiBtnWH - MYInputViewWidgetSpace, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
@@ -176,26 +178,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
             self.keyboardType = .System
         }
     }
-    
-    // MARK: - 预览界面通知
-    
-    @objc private func showPreview(_ notification: Notification){
-        let tag = notification.userInfo?["tag"] as! String
-        if tag == "1" {
-            let model = notification.userInfo?["model"] as! MYEmojiModel
-            let frame = notification.userInfo?["frame"] as! CGRect
-            let cacluateX = frame.origin.x - MYEmojiPreviewWidth/2 + frame.size.width/2
-            let cacluateY = heightWithFit() + MYStickerTopSpace + frame.origin.y + frame.size.height - MYEmojiPreviewHeight
-            
-            let frames = CGRect.init(origin: .init(x: cacluateX, y: cacluateY), size: .init(width: MYEmojiPreviewWidth, height: MYEmojiPreviewHeight))
-            emojiPreviewView.frame = frames
-            emojiPreviewView.preview(with: model)
-            addSubview(emojiPreviewView)
-        }else{
-            emojiPreviewView.removeFromSuperview()
-        }
-        
-    }
+  
     
     // MARK: - 键盘通知 WillShow;WillHide
     
@@ -234,7 +217,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         if self.keyboardType == .Record || self.keyboardType == .None || self.keyboardType == .System{
             
             var inputViewFrame = self.frame
-            let textViewHeight = heightWithFit()
+            let textViewHeight = defineHeight
             inputViewFrame.origin.x = initFrame.minX
             inputViewFrame.origin.y = initFrame.minY - (textViewHeight - initFrame.height)
             inputViewFrame.size.width = initFrame.width
@@ -259,21 +242,25 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         self.emojiButton.isSelected = false
         self.funcButton.isSelected = false
         var inputViewFrame = self.frame
-        let textViewHeight = heightWithFit()
+        let textViewHeight = defineHeight
         inputViewFrame.origin.x = initFrame.minX
         inputViewFrame.origin.y = initFrame.minY - (textViewHeight - initFrame.height)
         inputViewFrame.size.width = initFrame.width
         inputViewFrame.size.height = textViewHeight
-        self.keyboardType = .None
         isShowKeyboard = false
+        if self.keyboardType == .Record || self.keyboardType == .None {
+            inputViewFrame = initFrame
+        }
         UIView.animate(withDuration: MYDuration, animations: {
             self.frame = inputViewFrame
             self.emojiView.y = self.emojiViewMaxHeight
             self.funcsView.y = self.emojiViewMaxHeight
         }) { (finish) in
+            self.keyboardType = .None
             self.emojiView.isHidden = true
             self.funcsView.isHidden = true
         }
+        
     }
     
     // MARK: - textViewDelegate
@@ -334,7 +321,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if self.keyboardType == .System {
+        if self.isShowKeyboard {
             return CGSize.init(width: size.width, height: heightWithFit())
         }else{
             return initFrame.size
@@ -437,6 +424,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 }else{
                     if self.isShowKeyboard {
                         hidenEmojiFuncKeyboard()
+                        
                     }else{
                         self.frame = self.initFrame;
                         self.emojiView.isHidden = true
