@@ -9,8 +9,10 @@
 import UIKit
 
 protocol MYRecordOutputDelegate : NSObjectProtocol {
-    func recordFileSuccess(path: String, time: NSInteger, name: String)
+    func recordInit(_ name: String)
+    func recordFileSuccess(path: String, time: Int, name: String)
     func recordFileFaile(name: String)
+    func recordCancel(_ name: String)
 }
 
 class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate{
@@ -19,10 +21,6 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     private var audioRecord : MYAudioRecorder?
     
     // MARK: - touchView 代理
-    
-    //    func initRecord() {
-    //        self.audioRecord = createRecorder()
-    //    }
     
     func touchBegan() {
         print("开始录音")
@@ -41,24 +39,28 @@ class MYRecordHandled: NSObject,MYVoiceTouchViewDelegate,MYAudioRecorderDelegate
     
     func touchUpSlideEnd() {
         print("上滑取消")
+        self.delegate?.recordCancel(self.audioRecord!.fileName)
         self.audioRecord?.cancelSend()
         self.showView.hiddenView()
     }
     
     func touchTimeEnd() {
         print("时间到")
+        
         self.audioRecord?.stop()
         self.showView.hiddenView()
     }
     
     func touchTimeShort() {
         print("时间太短")
+        self.delegate?.recordInit(self.audioRecord!.fileName)
         self.audioRecord?.cancelSend()
         self.showView.showTimeShort()
     }
     
     func sendVoiceInteractionEvent() {
         print("录音已开始")
+        self.delegate?.recordInit(self.audioRecord!.fileName)
     }
     
     func isShowCancen(_ isCancel: Bool) {

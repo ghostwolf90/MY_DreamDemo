@@ -11,7 +11,7 @@ import AVFoundation
 
 protocol MYAudioRecorderDelegate : NSObjectProtocol{
     func recordSoundLevel(_ level: NSInteger)
-    func recordFileSuccess(path: String,time: NSInteger,name: String)
+    func recordFileSuccess(path: String,time: Int,name: String)
     func recordFileFaile(name: String)
 }
 
@@ -32,7 +32,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
     /// 判断当前录音机状态
     private(set) var isRecording : Bool = false
     /// 获取文件名
-    private(set) var fileName : String?
+    private(set) var fileName : String!
     /// 录音机代理
     weak var delegate : MYAudioRecorderDelegate?
     /// 缓存路径

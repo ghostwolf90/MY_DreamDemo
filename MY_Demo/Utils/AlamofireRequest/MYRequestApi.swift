@@ -29,10 +29,10 @@ extension ApiManager : Moya.TargetType {
     var baseURL: URL {
         switch self {
         case .testHome:
-            return URL.init(string: "http://t.268xue.com/app/")!
+            return URL.init(string: "")!
             
         default:
-            return URL.init(string: "http://t.268xue.com/app/")!
+            return URL.init(string: "")!
             
         }
     }
@@ -40,9 +40,9 @@ extension ApiManager : Moya.TargetType {
     var path: String {
         switch self {
         case .testHome:
-            return "index/banner"
+            return ""
         default:
-            return "course/info"
+            return ""
             
         }
     }

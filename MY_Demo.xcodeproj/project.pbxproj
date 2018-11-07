@@ -47,6 +47,9 @@
 		C6E837122192996300975F39 /* UIButton+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837112192996300975F39 /* UIButton+MAdd.swift */; };
 		C6E8371421929EEF00975F39 /* UIImage+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8371321929EEF00975F39 /* UIImage+MAdd.swift */; };
 		C6E837162192A20700975F39 /* UIView+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837152192A20700975F39 /* UIView+MAdd.swift */; };
+		C6E837222192CE3B00975F39 /* MYAcceptListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837212192CE3B00975F39 /* MYAcceptListView.swift */; };
+		C6E837242192D12D00975F39 /* MYMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837232192D12D00975F39 /* MYMessageModel.swift */; };
+		C6E837262192D2C400975F39 /* MYMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837252192D2C400975F39 /* MYMessageTableViewCell.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +100,9 @@
 		C6E837112192996300975F39 /* UIButton+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+MAdd.swift"; sourceTree = "<group>"; };
 		C6E8371321929EEF00975F39 /* UIImage+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MAdd.swift"; sourceTree = "<group>"; };
 		C6E837152192A20700975F39 /* UIView+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MAdd.swift"; sourceTree = "<group>"; };
+		C6E837212192CE3B00975F39 /* MYAcceptListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYAcceptListView.swift; sourceTree = "<group>"; };
+		C6E837232192D12D00975F39 /* MYMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYMessageModel.swift; sourceTree = "<group>"; };
+		C6E837252192D2C400975F39 /* MYMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYMessageTableViewCell.swift; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -218,16 +224,15 @@
 			isa = PBXGroup;
 			children = (
 				C663160B2181AAA7001D98F5 /* Lib */,
-				C6631608218174C9001D98F5 /* Resource */,
-				C604700021509EAB0010026A /* Define */,
 				C63D7D80214BC01500713BDC /* Utils */,
+				C6631608218174C9001D98F5 /* Resource */,
+				C6E837192192CCF200975F39 /* Modules */,
+				C604700021509EAB0010026A /* Define */,
 				C63D7D6E214B4DC400713BDC /* AppDelegate.swift */,
-				C63D7D70214B4DC400713BDC /* ViewController.swift */,
 				C63D7D72214B4DC400713BDC /* Main.storyboard */,
 				C63D7D75214B4DC500713BDC /* Assets.xcassets */,
 				C63D7D77214B4DC500713BDC /* LaunchScreen.storyboard */,
 				C63D7D7A214B4DC500713BDC /* Info.plist */,
-				C63D7D86215091D100713BDC /* TestModel.swift */,
 			);
 			path = MY_Demo;
 			sourceTree = "<group>";
@@ -348,6 +353,50 @@
 				30DE6C7B2184434900D543BB /* MYAudioRecorder.swift */,
 			);
 			path = Recorder;
+			sourceTree = "<group>";
+		};
+		C6E837192192CCF200975F39 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C6E8371B2192CD3900975F39 /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C6E8371B2192CD3900975F39 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C6E8371E2192CD7800975F39 /* model */,
+				C6E8371D2192CD6300975F39 /* view */,
+				C6E8371C2192CD5000975F39 /* control */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C6E8371C2192CD5000975F39 /* control */ = {
+			isa = PBXGroup;
+			children = (
+				C63D7D70214B4DC400713BDC /* ViewController.swift */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		C6E8371D2192CD6300975F39 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C6E837212192CE3B00975F39 /* MYAcceptListView.swift */,
+				C6E837252192D2C400975F39 /* MYMessageTableViewCell.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		C6E8371E2192CD7800975F39 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				C63D7D86215091D100713BDC /* TestModel.swift */,
+				C6E837232192D12D00975F39 /* MYMessageModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		DB64E79ABA7B0C7B15DB43E4 /* Pods */ = {
@@ -492,14 +541,17 @@
 				C625E9972153818A0098C422 /* MYResultModel.swift in Sources */,
 				C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */,
 				C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */,
+				C6E837242192D12D00975F39 /* MYMessageModel.swift in Sources */,
 				C6253F002189C6D100225EE6 /* MYEmojiPageScrollView.swift in Sources */,
 				C6A43D11218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift in Sources */,
+				C6E837222192CE3B00975F39 /* MYAcceptListView.swift in Sources */,
 				C63F0E342150E62D00BC8B0E /* MYRequestApi.swift in Sources */,
 				C63D7D87215091D100713BDC /* TestModel.swift in Sources */,
 				C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */,
 				C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */,
 				C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */,
 				C66316692186F728001D98F5 /* MYEasyAduioPlayer.swift in Sources */,
+				C6E837262192D2C400975F39 /* MYMessageTableViewCell.swift in Sources */,
 				C66316642186B5C9001D98F5 /* MYRecordHandled.swift in Sources */,
 				C6E8371421929EEF00975F39 /* UIImage+MAdd.swift in Sources */,
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,

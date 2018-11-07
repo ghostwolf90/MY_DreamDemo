@@ -82,7 +82,7 @@ class MYVoiceTouchTipView: UIView {
         let view = UIImageView(image: UIImage(named: "voice1"))
         view.contentMode = .scaleAspectFit
         let width : CGFloat = 60
-        view.frame = CGRect(x: (self.my.width - width)/2.0, y: width/2.5, width: my.width, height: my.width)
+        view.frame = CGRect(x: (self.my.width - width)/2.0, y: width/2.5, width: width, height: width)
         return view
     }()
     

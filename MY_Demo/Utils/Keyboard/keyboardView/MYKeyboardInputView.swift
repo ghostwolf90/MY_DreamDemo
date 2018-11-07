@@ -10,11 +10,14 @@ import UIKit
 
 protocol MYKeyboardInputViewDelegate : NSObjectProtocol {
     func keyboardOutPutAttribute(_ attribute:NSAttributedString)
-    func recordFileSuccess(path: String, time: NSInteger, name: String)
+    func recordInit(_ name: String)
+    func recordFileSuccess(path: String, time: Int, name: String)
+    func recordCancel(_ name: String)
     func recordFileFaile(name: String)
 }
 
 class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate,MYRecordOutputDelegate{
+    
     /// 获取键盘默认宽高
     var defineHeight : CGFloat {
         return heightWithFit() + safeAreaBottom()
@@ -612,12 +615,20 @@ extension MYKeyboardInputView {
         return self.textView.attributedText
     }
     
-    func recordFileSuccess(path: String, time: NSInteger, name: String) {
+    func recordFileSuccess(path: String, time: Int, name: String) {
         self.delegate?.recordFileSuccess(path: path, time: time, name: name)
     }
     
     func recordFileFaile(name: String) {
         self.delegate?.recordFileFaile(name: name)
+    }
+    
+    func recordInit(_ name: String) {
+        self.delegate?.recordInit(name)
+    }
+    
+    func recordCancel(_ name: String) {
+        self.delegate?.recordCancel(name)
     }
 }
 
