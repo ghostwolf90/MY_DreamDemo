@@ -1,14 +1,16 @@
 //
-//  MYKeyboardImageExtension.swift
-//  MYTool
+//  UIImage+MAdd.swift
+//  MY_Demo
 //
-//  Created by magic on 2018/8/20.
-//  Copyright © 2018年 MY. All rights reserved.
+//  Created by 马慧莹 on 2018/11/7.
+//  Copyright © 2018 magic. All rights reserved.
 //
 
 import Foundation
 import UIKit
-public extension UIImage {
+
+
+extension UIImage {
     class func image(name: String, path: String) -> UIImage?{
         let bundle = Bundle.init(for:MYKeyboardInputView.self)
         let url = bundle.url(forResource: "MYKeyboardBundle", withExtension: "bundle")
@@ -53,3 +55,5 @@ public extension UIImage {
         return nil
     }
 }
+
+

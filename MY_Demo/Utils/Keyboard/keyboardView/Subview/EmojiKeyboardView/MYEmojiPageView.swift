@@ -113,8 +113,8 @@ class MYEmojiPageView: UIView {
     private func showPreview(with model: MYEmojiModel,button: UIButton) {
         
         emojiPreviewView.frame = .init(origin: .zero, size: .init(width: MYEmojiPreviewWidth, height: MYEmojiPreviewHeight))
-        emojiPreviewView.bottom = button.bottom
-        emojiPreviewView.x = button.left - (MYEmojiPreviewWidth - button.width)/2
+        emojiPreviewView.my.bottom = button.my.bottom
+        emojiPreviewView.my.x = button.my.left - (MYEmojiPreviewWidth - button.my.width)/2
         emojiPreviewView.preview(with: model)
         addSubview(emojiPreviewView)
         

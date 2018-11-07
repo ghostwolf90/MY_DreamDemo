@@ -1,20 +1,19 @@
 //
-//  MYKeyboardButtonExtension.swift
-//  MYTool
+//  UIButton+MAdd.swift
+//  MY_Demo
 //
-//  Created by magic on 2018/8/23.
-//  Copyright © 2018年 MY. All rights reserved.
+//  Created by 马慧莹 on 2018/11/7.
+//  Copyright © 2018 magic. All rights reserved.
 //
 
 import Foundation
 import UIKit
+struct AssociatedKeys {
+    static var indicatorName = "my_indicatorName"
+    static var indicatorColor = "my_indicatorColor"
+}
 
-extension UIButton {
-    
-    private struct AssociatedKeys {
-        static var indicatorName = "my_indicatorName"
-        static var indicatorColor = "my_indicatorColor"
-    }
+extension MYExtension where myBase : UIButton {
     
     enum MYEmojiIndicatorType {
         case None
@@ -25,29 +24,30 @@ extension UIButton {
     
     var indicatorType : MYEmojiIndicatorType {
         get{
-           return objc_getAssociatedObject(self, &AssociatedKeys.indicatorName) as! MYEmojiIndicatorType
+            return objc_getAssociatedObject(self, &AssociatedKeys.indicatorName) as! MYEmojiIndicatorType
         }
         
         set{
-            self.subviews.forEach { (lineView) in
+                
+            my.subviews.forEach { (lineView) in
                 lineView.removeFromSuperview()
             }
             let width  = 1.0/UIScreen.main.scale
-            let leftLine = UIView.init(frame: .init(x: 0, y: frame.height/4.0, width: width, height: frame.height/2.0))
+            let leftLine = UIView.init(frame: .init(x: 0, y: my.frame.height/4.0, width: width, height: my.frame.height/2.0))
             leftLine.backgroundColor = self.indicatorColor
-            let rightLine = UIView.init(frame: .init(x: frame.width - width, y: frame.height/4.0, width: width, height: frame.height/2.0))
+            let rightLine = UIView.init(frame: .init(x: my.frame.width - width, y: my.frame.height/4.0, width: width, height: my.frame.height/2.0))
             rightLine.backgroundColor = self.indicatorColor
             switch newValue {
                 
             case .Left:
-                addSubview(leftLine)
+                my.addSubview(leftLine)
                 break
             case .Right:
-                addSubview(rightLine)
+                my.addSubview(rightLine)
                 break
             case .Boths:
-                addSubview(leftLine)
-                addSubview(rightLine)
+                my.addSubview(leftLine)
+                my.addSubview(rightLine)
                 break
             default:
                 break
@@ -69,6 +69,6 @@ extension UIButton {
             objc_setAssociatedObject(self, &AssociatedKeys.indicatorColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    
 }
+
+

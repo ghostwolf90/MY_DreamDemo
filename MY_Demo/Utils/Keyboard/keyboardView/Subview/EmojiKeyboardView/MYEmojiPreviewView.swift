@@ -22,9 +22,9 @@ class MYEmojiPreviewView: UIImageView {
         self.describeLabel.text = model.emojiDescription!
         self.emojiImageView.frame = .init(x: MYEmojiPreviewLFSpace, y: MYEmojiPreviewTopSpace, width: MYEmojiPreviewImageWH, height: MYEmojiPreviewImageWH)
         self.describeLabel.sizeToFit()
-        let labelSize = self.describeLabel.size
+        let labelSize = self.describeLabel.my.size
         
-        self.describeLabel.frame = .init(origin: .init(x: (width - labelSize.width)/2.0, y: self.emojiImageView.bottom + 3), size: labelSize)
+        self.describeLabel.frame = .init(origin: .init(x: (my.width - labelSize.width)/2.0, y: self.emojiImageView.my.bottom + 3), size: labelSize)
     }
     
     private lazy var emojiImageView : UIImageView = {

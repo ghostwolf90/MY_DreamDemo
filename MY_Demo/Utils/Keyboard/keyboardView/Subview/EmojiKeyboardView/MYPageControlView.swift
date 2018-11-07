@@ -16,8 +16,8 @@ class MYPageControlView: UIView {
     
     init() {
         super.init(frame: .zero)
-        self.width = MYStickerControlPageHeight
-        self.height = MYStickerControlPageHeight
+        self.my.width = MYStickerControlPageHeight
+        self.my.height = MYStickerControlPageHeight
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -25,7 +25,7 @@ class MYPageControlView: UIView {
     }
     
     func totlePage(_ totle: Int)  {
-        self.height = MYStickerControlPageHeight
+        self.my.height = MYStickerControlPageHeight
         self.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
@@ -40,7 +40,7 @@ class MYPageControlView: UIView {
             views?.append(view)
             right+=(MYKeyboardSpace5 + MYKeyboardSpace8)
         }
-        self.width = right + 1.0 - MYKeyboardSpace8;
+        self.my.width = right + 1.0 - MYKeyboardSpace8;
         addSubview(indexView)
         indexView.backgroundColor = MYColorForRGB(245, 166, 35)
         indexView.frame = .init(x: 0, y: 0, width: MYStickerControlPageHeight, height: MYStickerControlPageHeight)
@@ -52,7 +52,7 @@ class MYPageControlView: UIView {
         let starX = CGFloat(start) * (MYStickerControlPageHeight*2 - 1.0)
         let endX = CGFloat(end) * (MYStickerControlPageHeight*2 - 1.0)
         
-        indexView.x = starX + (endX - starX) * progress
+        indexView.my.x = starX + (endX - starX) * progress
     }
     
 

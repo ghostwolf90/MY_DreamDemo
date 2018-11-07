@@ -53,6 +53,8 @@ class ViewController: UIViewController,MYKeyboardInputViewDelegate {
         self.view.addSubview(playButton)
         playButton.frame = .init(x: 270, y: 80, width: 80, height: 30)
         playButton.addTarget(self, action: #selector(playEvent), for: .touchUpInside)
+        
+        
     }
     
     @objc func playEvent(){

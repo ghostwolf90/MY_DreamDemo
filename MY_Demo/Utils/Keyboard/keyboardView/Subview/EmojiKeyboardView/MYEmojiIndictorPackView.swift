@@ -43,8 +43,8 @@ class MYEmojiIndictorPackView: UICollectionView,UICollectionViewDelegate,UIColle
         let model = data[indexPath.row]
         
         let button = UIButton(frame: cell.contentView.bounds)
-        button.indicatorType = .Right
-        button.indicatorColor = MYColorForRGB(209, 209, 209)
+        button.my.indicatorType = .Right
+        button.my.indicatorColor = MYColorForRGB(209, 209, 209)
         button.contentMode = .scaleAspectFit
         button.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
         button.setImage(UIImage.image(name: model.emojiPackageName!, path: "emoji"), for: .normal)

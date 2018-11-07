@@ -46,8 +46,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         backgroundColor = MYColorForRGB(244, 244, 244)
         line.backgroundColor = MYColorForRGB(211, 211, 211)
         //默认宽高
-        width = UIScreen.main.bounds.width
-        height = heightWithFit()
+        my.width = UIScreen.main.bounds.width
+        my.height = heightWithFit()
         addSubview(line)
         addSubview(textView)
         addSubview(emojiButton)
@@ -72,12 +72,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     override var frame: CGRect {
         didSet{
             if frame.width < (MYEmojiBtnWH + MYInputViewWidgetSpace * 3)*2 {
-                width = (MYEmojiBtnWH + MYInputViewWidgetSpace * 3)*2
+                my.width = (MYEmojiBtnWH + MYInputViewWidgetSpace * 3)*2
             }
             
             if frame.height < heightWithFit() {
                 if self.keyboardType != .Record{
-                    height = heightWithFit()
+                    my.height = heightWithFit()
                 }
                 
             }
@@ -122,7 +122,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     /// 计算行高
     private func heightWithLine(_ lineNumber : Int) -> CGFloat{
         let onelineStr = NSString()
-        let onelineRect = onelineStr.boundingRect(with: CGSize(width: textView.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: MYTextViewTextFont)], context: nil)
+        let onelineRect = onelineStr.boundingRect(with: CGSize(width: textView.my.width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: MYTextViewTextFont)], context: nil)
         return onelineRect.size.height * CGFloat(lineNumber) + MYTextViewTextDefineHeight
     }
     
@@ -132,14 +132,14 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         let top = MYTextViewTopBottomSpace
         var totleHeight = heightWithFit()
         if self.keyboardType == .Record {
-            totleHeight = self.height - safeAreaBottom()
+            totleHeight = self.my.height - safeAreaBottom()
         }
         let widgetY = totleHeight - MYEmojiBtnWH - MYInputViewWidgetSpace
-        line.frame = .init(x: 0, y: 0, width: self.width, height: 0.5)
+        line.frame = .init(x: 0, y: 0, width: self.my.width, height: 0.5)
         voiceButton.frame = CGRect.init(x: MYInputViewWidgetSpace, y:  widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
-        funcButton.frame = CGRect.init(x: self.width - MYInputViewWidgetSpace - MYEmojiBtnWH, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
-        emojiButton.frame = CGRect.init(x: funcButton.left - MYEmojiBtnWH - MYInputViewWidgetSpace, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
-        let width = emojiButton.left - left - MYInputViewWidgetSpace
+        funcButton.frame = CGRect.init(x: self.my.width - MYInputViewWidgetSpace - MYEmojiBtnWH, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
+        emojiButton.frame = CGRect.init(x: funcButton.my.left - MYEmojiBtnWH - MYInputViewWidgetSpace, y: widgetY, width: MYEmojiBtnWH, height: MYEmojiBtnWH)
+        let width = emojiButton.my.left - left - MYInputViewWidgetSpace
         let height = totleHeight - MYTextViewTopBottomSpace * 2.0
         textView.frame = CGRect.init(x: left, y: top, width: width, height: height)
         voiceView.frame = textView.frame
@@ -199,11 +199,11 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         let textViewHeight = heightWithFit()
         inputViewFrame.origin.y = (self.superview?.bounds.height)! - keyboardFrame.height - textViewHeight
         inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
-        inputViewFrame.origin.x = -(self.superview?.left ?? 0)
+        inputViewFrame.origin.x = -(self.superview?.my.left ?? 0)
         UIView.animate(withDuration: duration, animations: {
             self.frame = inputViewFrame
-            self.emojiView.y = self.emojiViewMaxHeight
-            self.funcsView.y = self.emojiViewMaxHeight
+            self.emojiView.my.y = self.emojiViewMaxHeight
+            self.funcsView.my.y = self.emojiViewMaxHeight
         }) { (finish) in
             self.emojiView.isHidden = true
             self.funcsView.isHidden = true
@@ -237,6 +237,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         
     }
     
+    /// 收回键盘,主要做点击空白处收回
     private func hidenEmojiFuncKeyboard() {
         
         self.emojiButton.isSelected = false
@@ -253,8 +254,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         }
         UIView.animate(withDuration: MYDuration, animations: {
             self.frame = inputViewFrame
-            self.emojiView.y = self.emojiViewMaxHeight
-            self.funcsView.y = self.emojiViewMaxHeight
+            self.emojiView.my.y = self.emojiViewMaxHeight
+            self.funcsView.my.y = self.emojiViewMaxHeight
         }) { (finish) in
             self.keyboardType = .None
             self.emojiView.isHidden = true
@@ -281,7 +282,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         }else{
             self.emojiView.sendButton.isSelected = false
         }
-        let size = sizeThatFits(self.size)
+        let size = sizeThatFits(self.my.size)
         let newFrame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height - self.emojiViewMaxHeight, width: size.width, height: size.height + self.emojiViewMaxHeight)
         frameAnimated(newFrame)
         textView.scrollRangeToVisible(textView.selectedRange)
@@ -316,7 +317,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     /// 重写 sizefit 方法
     override func sizeToFit() {
-        let size = sizeThatFits(self.size)
+        let size = sizeThatFits(self.my.size)
         self.frame = CGRect.init(x: self.frame.minX, y: self.frame.maxY - size.height, width: size.width, height: size.height)
     }
     
@@ -340,8 +341,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
             self.frame = frame
             self.calculateWidgetFrame()
             if self.keyboardType == .Emoji || self.keyboardType == .Funcs{
-                self.emojiView.frame = .init(x: 0, y: self.heightWithFit(), width: self.width, height: self.emojiViewMaxHeight)
-                self.funcsView.frame = .init(x: 0, y: self.heightWithFit(), width: self.width, height: self.emojiViewMaxHeight)
+                self.emojiView.frame = .init(x: 0, y: self.heightWithFit(), width: self.my.width, height: self.emojiViewMaxHeight)
+                self.funcsView.frame = .init(x: 0, y: self.heightWithFit(), width: self.my.width, height: self.emojiViewMaxHeight)
             }
         }
         
@@ -372,8 +373,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 
                 UIView.animate(withDuration: MYDuration, animations: {
                     self.frame = inputViewFrame
-                    self.funcsView.y = inputViewFrame.size.height
-                    self.emojiView.y = textViewHeight
+                    self.funcsView.my.y = inputViewFrame.size.height
+                    self.emojiView.my.y = textViewHeight
                 }) { (finish) in
                     self.funcsView.isHidden = true
                 }
@@ -386,8 +387,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                     self.funcButton.isSelected = false
                     self.textView.becomeFirstResponder()
                     UIView.animate(withDuration: MYDuration, animations: {
-                        self.emojiView.y = self.emojiViewMaxHeight
-                        self.funcsView.y = self.emojiViewMaxHeight
+                        self.emojiView.my.y = self.emojiViewMaxHeight
+                        self.funcsView.my.y = self.emojiViewMaxHeight
                     }) { (finish) in
                         self.emojiView.isHidden = true
                         self.funcsView.isHidden = true
@@ -408,8 +409,8 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 inputViewFrame.size.height = textViewHeight + emojiViewMaxHeight
                 UIView.animate(withDuration: MYDuration, animations: {
                     self.frame = inputViewFrame
-                    self.emojiView.y = inputViewFrame.size.height
-                    self.funcsView.y = textViewHeight
+                    self.emojiView.my.y = inputViewFrame.size.height
+                    self.funcsView.my.y = textViewHeight
                 }) { (finsh) in
                     self.emojiView.isHidden = true
                 }
@@ -501,7 +502,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     private lazy var emojiView : MYEmojiKeyboardView = {
     
-        let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
+        let view = MYEmojiKeyboardView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: my.width, height: emojiViewMaxHeight))
         view.isHidden = true
         view.delegate = self
         return view
@@ -509,7 +510,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     
     private lazy var funcsView : UIView = {
         
-        let view = UIView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: width, height: emojiViewMaxHeight))
+        let view = UIView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: my.width, height: emojiViewMaxHeight))
         let tipLabel = UILabel()
         tipLabel.frame = .init(x: 20, y: 20, width: 100, height: 20)
         tipLabel.textAlignment = .center

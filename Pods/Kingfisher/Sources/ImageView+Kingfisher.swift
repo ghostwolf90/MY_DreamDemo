@@ -66,7 +66,7 @@ extension Kingfisher where Base: ImageView {
             completionHandler?(nil, nil, .none, nil)
             return .empty
         }
-        
+
         var options = KingfisherManager.shared.defaultOptions + (options ?? KingfisherEmptyOptionsInfo)
         let noImageOrPlaceholderSet = base.image == nil && self.placeholder == nil
         

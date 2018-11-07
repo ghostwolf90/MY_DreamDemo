@@ -84,7 +84,7 @@ class MYVoiceTouchView: UIView {
             if authStatus == .denied {
                 //提示开启麦克风
                 let rootControl = UIApplication.shared.delegate?.window!?.rootViewController
-                let control = topViewControlWithRootViewControler(rootControl)
+                let control = my.topViewControlWithRootViewControler(rootControl)
                 let tipContoler = UIAlertController(title: "麦克风权限未开启", message: "麦克风权限未开启，请进入系统【设置】>【隐私】>【麦克风】中打开开关,开启麦克风功能", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
                 let okAction = UIAlertAction(title: "去开启", style: .default) { (action) in

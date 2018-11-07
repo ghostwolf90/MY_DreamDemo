@@ -27,8 +27,8 @@ class MYVoiceTouchTipView: UIView {
         backgroundColor = UIColor.black.withAlphaComponent(0.5)
         layer.masksToBounds = true
         layer.cornerRadius = 5
-        self.height = 140.0
-        self.width = 140.0
+        self.my.height = 140.0
+        self.my.width = 140.0
         addSubview(self.imageView)
         addSubview(self.tipLabel)
     }
@@ -82,7 +82,7 @@ class MYVoiceTouchTipView: UIView {
         let view = UIImageView(image: UIImage(named: "voice1"))
         view.contentMode = .scaleAspectFit
         let width : CGFloat = 60
-        view.frame = CGRect(x: (self.width - width)/2.0, y: width/2.5, width: width, height: width)
+        view.frame = CGRect(x: (self.my.width - width)/2.0, y: width/2.5, width: my.width, height: my.width)
         return view
     }()
     
@@ -94,7 +94,7 @@ class MYVoiceTouchTipView: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
-        label.frame = CGRect(x: 15.0/2.0, y: self.height - 30.0, width: self.width - 15.0, height: 20.0)
+        label.frame = CGRect(x: 15.0/2.0, y: self.my.height - 30.0, width: self.my.width - 15.0, height: 20.0)
         return label
     }()
     

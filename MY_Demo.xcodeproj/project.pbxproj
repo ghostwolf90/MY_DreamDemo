@@ -18,7 +18,6 @@
 		C625E993215373EE0098C422 /* MYObservable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */; };
 		C625E9972153818A0098C422 /* MYResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C625E9962153818A0098C422 /* MYResultModel.swift */; };
 		C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */; };
-		C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */; };
 		C63D7D6F214B4DC400713BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D6E214B4DC400713BDC /* AppDelegate.swift */; };
 		C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D7D70214B4DC400713BDC /* ViewController.swift */; };
 		C63D7D74214B4DC400713BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63D7D72214B4DC400713BDC /* Main.storyboard */; };
@@ -31,8 +30,6 @@
 		C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE12159C7C100B079E5 /* MYTextView.swift */; };
 		C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */; };
 		C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */; };
-		C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */; };
-		C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */; };
 		C663160A218174CF001D98F5 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6631609218174CF001D98F5 /* loading.gif */; };
 		C66316552181CF3E001D98F5 /* MYEasyHUDSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */; };
 		C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */; };
@@ -46,6 +43,10 @@
 		C6A43D0D218D96F300ECCDD5 /* MYEmojiPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A43D0C218D96F300ECCDD5 /* MYEmojiPageView.swift */; };
 		C6A43D0F218D97F700ECCDD5 /* MYEmojiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A43D0E218D97F700ECCDD5 /* MYEmojiPreviewView.swift */; };
 		C6A43D11218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A43D10218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift */; };
+		C6E83710219294C700975F39 /* MYExtenstionDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8370F219294C700975F39 /* MYExtenstionDefine.swift */; };
+		C6E837122192996300975F39 /* UIButton+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837112192996300975F39 /* UIButton+MAdd.swift */; };
+		C6E8371421929EEF00975F39 /* UIImage+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8371321929EEF00975F39 /* UIImage+MAdd.swift */; };
+		C6E837162192A20700975F39 /* UIView+MAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E837152192A20700975F39 /* UIView+MAdd.swift */; };
 		D60FCE19B3E499A277CDBB55 /* Pods_MY_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +64,6 @@
 		C625E992215373EE0098C422 /* MYObservable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MYObservable+ObjectMapper.swift"; sourceTree = "<group>"; };
 		C625E9962153818A0098C422 /* MYResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYResultModel.swift; sourceTree = "<group>"; };
 		C6365A24215B1B9100DA12B6 /* MYEmojiKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiKeyboardView.swift; sourceTree = "<group>"; };
-		C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardButtonExtension.swift; sourceTree = "<group>"; };
 		C63D7D6B214B4DC400713BDC /* MY_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MY_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63D7D6E214B4DC400713BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C63D7D70214B4DC400713BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,8 +78,6 @@
 		C6515CE12159C7C100B079E5 /* MYTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYTextView.swift; sourceTree = "<group>"; };
 		C6515CE32159C84C00B079E5 /* MYKeyboardDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardDefine.swift; sourceTree = "<group>"; };
 		C6515CE52159C86C00B079E5 /* MYKeyboardInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardInputView.swift; sourceTree = "<group>"; };
-		C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardImageExtension.swift; sourceTree = "<group>"; };
-		C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYKeyboardViewExtension.swift; sourceTree = "<group>"; };
 		C6631609218174CF001D98F5 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		C66316542181CF3E001D98F5 /* MYEasyHUDSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MYEasyHUDSDK.framework; sourceTree = "<group>"; };
 		C66316572182ED8E001D98F5 /* MYVoiceTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYVoiceTouchView.swift; sourceTree = "<group>"; };
@@ -95,6 +93,10 @@
 		C6A43D0C218D96F300ECCDD5 /* MYEmojiPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYEmojiPageView.swift; sourceTree = "<group>"; };
 		C6A43D0E218D97F700ECCDD5 /* MYEmojiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiPreviewView.swift; sourceTree = "<group>"; };
 		C6A43D10218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYEmojiIndictorPackView.swift; sourceTree = "<group>"; };
+		C6E8370F219294C700975F39 /* MYExtenstionDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYExtenstionDefine.swift; sourceTree = "<group>"; };
+		C6E837112192996300975F39 /* UIButton+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+MAdd.swift"; sourceTree = "<group>"; };
+		C6E8371321929EEF00975F39 /* UIImage+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MAdd.swift"; sourceTree = "<group>"; };
+		C6E837152192A20700975F39 /* UIView+MAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MAdd.swift"; sourceTree = "<group>"; };
 		EE3DA9B3C2E144DD94C55347 /* Pods_MY_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MY_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -267,9 +269,10 @@
 		C6515CED2159CEDF00B079E5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				C6365A26215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift */,
-				C6515CE82159C8B300B079E5 /* MYKeyboardImageExtension.swift */,
-				C6515CE92159C8B300B079E5 /* MYKeyboardViewExtension.swift */,
+				C6E8370F219294C700975F39 /* MYExtenstionDefine.swift */,
+				C6E837112192996300975F39 /* UIButton+MAdd.swift */,
+				C6E8371321929EEF00975F39 /* UIImage+MAdd.swift */,
+				C6E837152192A20700975F39 /* UIView+MAdd.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -488,7 +491,6 @@
 			files = (
 				C625E9972153818A0098C422 /* MYResultModel.swift in Sources */,
 				C63D7D71214B4DC400713BDC /* ViewController.swift in Sources */,
-				C6515CEB2159C8B300B079E5 /* MYKeyboardImageExtension.swift in Sources */,
 				C6515CE62159C86C00B079E5 /* MYKeyboardInputView.swift in Sources */,
 				C6253F002189C6D100225EE6 /* MYEmojiPageScrollView.swift in Sources */,
 				C6A43D11218DC5B100ECCDD5 /* MYEmojiIndictorPackView.swift in Sources */,
@@ -499,23 +501,25 @@
 				C604700321509EF70010026A /* ObjectMapperCommonFunc.swift in Sources */,
 				C66316692186F728001D98F5 /* MYEasyAduioPlayer.swift in Sources */,
 				C66316642186B5C9001D98F5 /* MYRecordHandled.swift in Sources */,
+				C6E8371421929EEF00975F39 /* UIImage+MAdd.swift in Sources */,
 				C6515CE22159C7C100B079E5 /* MYTextView.swift in Sources */,
 				C6A43D0D218D96F300ECCDD5 /* MYEmojiPageView.swift in Sources */,
 				C6A43D0F218D97F700ECCDD5 /* MYEmojiPreviewView.swift in Sources */,
+				C6E837162192A20700975F39 /* UIView+MAdd.swift in Sources */,
 				C6A43CC9218C471200ECCDD5 /* MYPageControlView.swift in Sources */,
-				C6365A27215B1D2600DA12B6 /* MYKeyboardButtonExtension.swift in Sources */,
 				C6253EF92189BFAA00225EE6 /* MYEmojiPackageModel.swift in Sources */,
 				C66316582182ED8E001D98F5 /* MYVoiceTouchView.swift in Sources */,
 				C663165F2186A5B9001D98F5 /* MYConverAudioFile.m in Sources */,
+				C6E83710219294C700975F39 /* MYExtenstionDefine.swift in Sources */,
 				C6515CE42159C84C00B079E5 /* MYKeyboardDefine.swift in Sources */,
 				C6A43CCB218C811000ECCDD5 /* MYMatchingEmojiResult.swift in Sources */,
 				C6365A25215B1B9100DA12B6 /* MYEmojiKeyboardView.swift in Sources */,
-				C6515CEC2159C8B300B079E5 /* MYKeyboardViewExtension.swift in Sources */,
 				C63F0E362150EE5C00BC8B0E /* MYRequestPlugin.swift in Sources */,
 				30DE6C7C2184434900D543BB /* MYAudioRecorder.swift in Sources */,
 				C66316662186E4A7001D98F5 /* MYVoiceTouchTipView.swift in Sources */,
 				C63F0E3A2151040400BC8B0E /* MYNetRequest.swift in Sources */,
 				C6724742218BF60A007E6E9F /* MYEmojiProtocol.swift in Sources */,
+				C6E837122192996300975F39 /* UIButton+MAdd.swift in Sources */,
 				C6253EFE2189C04700225EE6 /* MYMatchingEmojiManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
