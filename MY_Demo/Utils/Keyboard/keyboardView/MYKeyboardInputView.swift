@@ -93,6 +93,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
     public func clearText()  {
         self.textView.text = nil
         self.textView.font = UIFont.systemFont(ofSize: MYTextViewTextFont)
+        self.textViewDidChange(self.textView)
     }
     
     /// 收回键盘
@@ -273,7 +274,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         if text == "\n" {
             self.delegate?.keyboardOutPutAttribute(textView.attributedText)
             clearText()
-            resignKeyboard()
+//            resignKeyboard()
             return false
         }
         return true
@@ -543,7 +544,7 @@ extension MYKeyboardInputView {
     func didSendButton() {
         self.delegate?.keyboardOutPutAttribute(textView.attributedText)
         clearText()
-        resignKeyboard()
+//        resignKeyboard()
     }
     
     func didClickEmoji(with model: MYEmojiModel) {
