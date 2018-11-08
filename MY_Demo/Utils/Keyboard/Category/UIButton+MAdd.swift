@@ -13,7 +13,7 @@ struct AssociatedKeys {
     static var indicatorColor = "my_indicatorColor"
 }
 
-extension MYExtension where myBase : UIButton {
+extension MYExtension where Base : UIButton {
     
     enum MYEmojiIndicatorType {
         case None

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension MYExtension where myBase : UIView {
+extension MYExtension where Base : UIView {
     // MARK: - 扩展属性
     /// x
     public var x: CGFloat {

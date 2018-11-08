@@ -15,9 +15,9 @@ public protocol MYCompatible {
     
 }
 
-public final class MYExtension<myBase>: MYCompatible {
-    public let my: myBase
-    public init(_ my:myBase) {
+public final class MYExtension<Base>: MYCompatible {
+    public let my: Base
+    public init(_ my:Base) {
         self.my = my
     }
 }

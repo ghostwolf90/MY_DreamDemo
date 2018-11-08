@@ -531,7 +531,12 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         handle.delegate = self
         return handle
     }()
-   
+    
+    
+    deinit {
+        /// 移除所有的通知
+        NotificationCenter.default.removeObserver(self)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
