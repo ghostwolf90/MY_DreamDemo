@@ -58,7 +58,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         addSubview(funcButton)
         addSubview(voiceView)
         addSubview(emojiView)
-        addSubview(funcsView)
+        addSubview(functionsView)
         //增加监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -207,10 +207,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         UIView.animate(withDuration: duration, animations: {
             self.frame = inputViewFrame
             self.emojiView.my.y = self.emojiViewMaxHeight
-            self.funcsView.my.y = self.emojiViewMaxHeight
+            self.functionsView.my.y = self.emojiViewMaxHeight
         }) { (finish) in
             self.emojiView.isHidden = true
-            self.funcsView.isHidden = true
+            self.functionsView.isHidden = true
         }
     }
     
@@ -259,11 +259,11 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         UIView.animate(withDuration: MYDuration, animations: {
             self.frame = inputViewFrame
             self.emojiView.my.y = self.emojiViewMaxHeight
-            self.funcsView.my.y = self.emojiViewMaxHeight
+            self.functionsView.my.y = self.emojiViewMaxHeight
         }) { (finish) in
             self.keyboardType = .None
             self.emojiView.isHidden = true
-            self.funcsView.isHidden = true
+            self.functionsView.isHidden = true
         }
         
     }
@@ -346,7 +346,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
             self.calculateWidgetFrame()
             if self.keyboardType == .Emoji || self.keyboardType == .Funcs{
                 self.emojiView.frame = .init(x: 0, y: self.heightWithFit(), width: self.my.width, height: self.emojiViewMaxHeight)
-                self.funcsView.frame = .init(x: 0, y: self.heightWithFit(), width: self.my.width, height: self.emojiViewMaxHeight)
+                self.functionsView.frame = .init(x: 0, y: self.heightWithFit(), width: self.my.width, height: self.emojiViewMaxHeight)
             }
         }
         
@@ -377,10 +377,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 
                 UIView.animate(withDuration: MYDuration, animations: {
                     self.frame = inputViewFrame
-                    self.funcsView.my.y = inputViewFrame.size.height
+                    self.functionsView.my.y = inputViewFrame.size.height
                     self.emojiView.my.y = textViewHeight
                 }) { (finish) in
-                    self.funcsView.isHidden = true
+                    self.functionsView.isHidden = true
                 }
                     
                 
@@ -392,10 +392,10 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                     self.textView.becomeFirstResponder()
                     UIView.animate(withDuration: MYDuration, animations: {
                         self.emojiView.my.y = self.emojiViewMaxHeight
-                        self.funcsView.my.y = self.emojiViewMaxHeight
+                        self.functionsView.my.y = self.emojiViewMaxHeight
                     }) { (finish) in
                         self.emojiView.isHidden = true
-                        self.funcsView.isHidden = true
+                        self.functionsView.isHidden = true
                     }
                 }
                 break
@@ -403,7 +403,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 self.isShowKeyboard = true
                 self.voiceButton.isSelected = true
                 self.emojiButton.isSelected = false
-                self.funcsView.isHidden = false
+                self.functionsView.isHidden = false
                 if self.textView.isFirstResponder {
                     self.textView.resignFirstResponder()
                 }
@@ -414,7 +414,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                 UIView.animate(withDuration: MYDuration, animations: {
                     self.frame = inputViewFrame
                     self.emojiView.my.y = inputViewFrame.size.height
-                    self.funcsView.my.y = textViewHeight
+                    self.functionsView.my.y = textViewHeight
                 }) { (finsh) in
                     self.emojiView.isHidden = true
                 }
@@ -433,7 +433,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
                     }else{
                         self.frame = self.initFrame;
                         self.emojiView.isHidden = true
-                        self.funcsView.isHidden = true
+                        self.functionsView.isHidden = true
                     }
                     
                 }
@@ -512,7 +512,7 @@ class MYKeyboardInputView: UIView,UITextViewDelegate,MYEmojiKeyboardViewDelegate
         return view
     }()
     
-    private lazy var funcsView : UIView = {
+    private lazy var functionsView : UIView = {
         
         let view = UIView.init(frame: .init(x: 0, y: emojiViewMaxHeight, width: my.width, height: emojiViewMaxHeight))
         let tipLabel = UILabel()
