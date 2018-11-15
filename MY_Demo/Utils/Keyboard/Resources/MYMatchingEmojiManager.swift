@@ -118,8 +118,8 @@ class MYMatchingEmojiManager: NSObject {
             return nil
         }
         //正则匹配,匹配[]中间的内容,如果出现[a[a]]则只匹配出[a]
-        //正则验证网站:https://c.runoob.com/front-end/854  表达式: \[([a-z])+?\]
-        let regex = try! NSRegularExpression.init(pattern: "\\[([a-z])+?\\]")
+        //正则验证网站:https://c.runoob.com/front-end/854  表达式: \[([a-z_.])+?\]
+        let regex = try! NSRegularExpression.init(pattern: "\\[([a-z_.])+?\\]")
         let results = regex.matches(in: string
             , options: NSRegularExpression.MatchingOptions.reportProgress, range: .init(location: 0, length: string.count))
         
