@@ -87,17 +87,17 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
                         let time =  MYEasyAduioPlayer.shared.getAudioDuration(with: URL.init(fileURLWithPath: result.resultPath))
                         self?.delegate?.recordFileSuccess(path: result.resultPath, time: time, name: fileName ?? "")
                     }else {
+                        
+                        //删除转换的 mp3地址
+                        if fileManager.fileExists(atPath: result.resultPath) {
+                            print("回调 删除 mp3 文件: \(result.resultPath)")
+                            try? fileManager.removeItem(atPath: result.resultPath)
+                        }
                         if !result.isCancel {
-                            print("回调 MP3转换失败\n")
-                            //删除转换的 mp3地址
-                            if fileManager.fileExists(atPath: result.resultPath) {
-                                print("回调 删除 mp3 文件: \(result.resultPath)")
-                                try? fileManager.removeItem(atPath: result.resultPath)
-                            }
                             self?.delegate?.recordFileFaile(name: fileName ?? "")
                         }
                     }
-                     
+                    
                 }
             }
             //打开定时器,监测声波
@@ -121,21 +121,9 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         //取消转换
         MYConverAudioFile.sharedInstance().cancelSendEndRecord()
         playbackSessionModel()
-        deleteLastRecord()
+        
     }
     
-    /// 删除最后录音文件
-    public func deleteLastRecord() {
-        deleteCafFile()
-        deleteMP3File()
-    }
-    
-    public func deinitRecored() {
-        //取消发送
-        cancelSend()
-        //删除最后一次录音文件
-        deleteLastRecord()
-    }
     
     //MARK: 录音机代理
     
@@ -144,7 +132,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
             playbackSessionModel()
             self.audioRecorder = nil
             DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-             MYConverAudioFile.sharedInstance().sendEndRecord()
+                MYConverAudioFile.sharedInstance().sendEndRecord()
             }
         }
     }
@@ -210,7 +198,7 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
             self.audioRecorder?.delegate = self
             self.audioRecorder?.isMeteringEnabled = true
             self.audioRecorder?.prepareToRecord()
-             
+            
         } catch  {
             print("录音机创建失败")
         }
@@ -279,9 +267,9 @@ class MYAudioRecorder: NSObject,AVAudioRecorderDelegate{
         setting[AVEncoderAudioQualityKey] = NSNumber(value: self.qualityKey.rawValue)
         return setting
     }
-   
+    
     //MARK: 懒加载
     
     
-
+    
 }

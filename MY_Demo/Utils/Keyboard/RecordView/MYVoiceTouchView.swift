@@ -130,7 +130,7 @@ class MYVoiceTouchView: UIView {
         if self.timeCount == 61 {
             //时间到,结束录音
             self.delegate?.touchTimeEnd()
-            invalidateTimeer()
+            invalidateTimer()
         }
     }
     
@@ -169,11 +169,11 @@ class MYVoiceTouchView: UIView {
                 self.delegate?.touchEnd()
             }
         }
-        invalidateTimeer()
+        invalidateTimer()
     }
     
     /// 取消定时器,结束事件
-    private func invalidateTimeer() {
+    private func invalidateTimer() {
         self.timer?.invalidate()
         self.timer = nil
         self.timeCount = 0
