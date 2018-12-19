@@ -53,8 +53,8 @@ class MYVoiceTouchView: UIView {
         layer.borderWidth = 0.5
         layer.borderColor = MYColorForRGB(219, 219, 219).cgColor
         addSubview(self.voiceButton)
-        NotificationCenter.default.addObserver(self, selector:#selector(enterForeground(_:)) , name: UIApplication.willResignActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground(_:)), name: AVAudioSession.interruptionNotification, object: nil)//声音被打断,来电,闹铃等
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(interruptionEvent(_:)), name: AVAudioSession.interruptionNotification, object: nil)//声音被打断,来电,闹铃等
     }
     
     override func layoutSubviews() {
@@ -104,17 +104,23 @@ class MYVoiceTouchView: UIView {
                voiceEndEvent()
             }
             
-        }
-        if self.voiceButton.isSelected {
-            let point = gestureRecognizer.location(in: self.voiceButton)
-            if point.y > self.slidArea {
-                self.isUpSlide = false
-            }else{
-                //上滑
-                self.isUpSlide = true
+        }else if(gestureRecognizer.state == .changed){
+            if self.voiceButton.isSelected {
+                let point = gestureRecognizer.location(in: self.voiceButton)
+                if point.y > self.slidArea {
+                    self.isUpSlide = false
+                }else{
+                    //上滑
+                    self.isUpSlide = true
+                }
+                self.delegate?.isShowCancen(self.isUpSlide)
             }
-            self.delegate?.isShowCancen(self.isUpSlide)
+        }else if(gestureRecognizer.state == .cancelled || gestureRecognizer.state == .ended || gestureRecognizer.state == .failed){
+            if self.voiceButton.isSelected {
+                voiceEndEvent()
+            }
         }
+        
     }
     
     // MARK: - 响应方法
@@ -134,7 +140,7 @@ class MYVoiceTouchView: UIView {
         }
     }
     
-    @objc private func enterForeground(_ notification: Notification) {
+    @objc private func interruptionEvent(_ notification: Notification) {
         if self.voiceButton.isSelected {
             voiceEndEvent()
         }
